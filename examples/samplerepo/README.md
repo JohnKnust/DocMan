@@ -37,3 +37,4 @@ All modules follow the standard documentation format with required metadata:
 - [LLM Applications](apps/llm/README.md)
 - [Configuration Utils](libs/config_utils/README.md)
 - [Documentation Tools](tools/documentation_maintenance/README.md)
+- [Broken Link](nonexistent/file.md)
