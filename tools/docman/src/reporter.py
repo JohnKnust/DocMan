@@ -36,7 +36,7 @@ class Reporter:
         self.print_section("Missing READMEs", results.missing_readmes, "🚧")
         self.print_section("Metadata violations", results.metadata_violations, "🚧")
         self.print_section("Broken links", results.broken_links, "🚧")
-        self.print_section("Parent-date bumps applied", results.date_bumps, "🚧")
+        self.print_section("Date inconsistencies", results.date_bumps, "🚧")
         self.print_section("New index entries", results.new_index_entries, "✅")
 
         # Calculate total issues

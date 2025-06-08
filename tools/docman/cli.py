@@ -33,6 +33,7 @@ from src.indexer import DocumentationIndexer
 from src.reporter import Reporter, ValidationResult
 from src.validators.readme_validator import ReadmeValidator
 from src.validators.metadata_validator import MetadataValidator
+from src.validators.link_validator import LinkValidator
 
 
 def parse_arguments() -> argparse.Namespace:
@@ -118,8 +119,26 @@ def main() -> int:
         for violation in metadata_violations:
             print(f"  {violation}")
 
-    # TODO: Implement remaining validation steps
     # Step 4: Link & Date Integrity
+    if args.verbose:
+        print("🔗 Checking link integrity and date consistency...")
+
+    link_validator = LinkValidator(repo_path)
+    link_violations, date_issues = link_validator.validate()
+    results.broken_links = link_violations
+    results.date_bumps = date_issues  # Note: these are reports, not actual bumps
+
+    if args.verbose and (link_violations or date_issues):
+        if link_violations:
+            print(f"Found {len(link_violations)} broken links:")
+            for violation in link_violations:
+                print(f"  {violation}")
+        if date_issues:
+            print(f"Found {len(date_issues)} date inconsistencies:")
+            for issue in date_issues:
+                print(f"  {issue}")
+
+    # TODO: Implement remaining validation steps
     # Step 5: Index Management
     
     # Generate report and return exit code
