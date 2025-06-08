@@ -138,8 +138,34 @@ def main() -> int:
             for issue in date_issues:
                 print(f"  {issue}")
 
-    # TODO: Implement remaining validation steps
     # Step 5: Index Management
+    if args.verbose:
+        print("📚 Managing documentation index...")
+
+    # Find all markdown files for indexing
+    all_md_files = find_all_markdown_files(repo_path)
+    missing_from_index = indexer.find_missing_entries(all_md_files)
+
+    # Update index if there are missing entries
+    new_entries_count = 0
+    if missing_from_index:
+        if args.verbose:
+            print(f"Found {len(missing_from_index)} files missing from index:")
+            for missing_file in missing_from_index:
+                relative_path = missing_file.relative_to(repo_path)
+                print(f"  {relative_path}")
+
+        new_entries_count = indexer.update_index(missing_from_index)
+        if args.verbose and new_entries_count > 0:
+            print(f"Added {new_entries_count} entries to DOCUMENTATION_INDEX.md")
+
+    # Create summary entries for reporting
+    index_entries = []
+    for missing_file in missing_from_index:
+        relative_path = missing_file.relative_to(repo_path)
+        index_entries.append(f"✅ Added {relative_path} to index")
+
+    results.new_index_entries = index_entries
     
     # Generate report and return exit code
     return reporter.print_summary(results)
