@@ -32,6 +32,7 @@ from src.utils import find_all_directories, find_all_markdown_files
 from src.indexer import DocumentationIndexer
 from src.reporter import Reporter, ValidationResult
 from src.validators.readme_validator import ReadmeValidator
+from src.validators.metadata_validator import MetadataValidator
 
 
 def parse_arguments() -> argparse.Namespace:
@@ -104,8 +105,20 @@ def main() -> int:
         for violation in readme_violations:
             print(f"  {violation}")
 
-    # TODO: Implement remaining validation steps
     # Step 3: Metadata Format Enforcement
+    if args.verbose:
+        print("📋 Checking metadata format...")
+
+    metadata_validator = MetadataValidator(repo_path)
+    metadata_violations = metadata_validator.validate()
+    results.metadata_violations = metadata_violations
+
+    if args.verbose and metadata_violations:
+        print(f"Found {len(metadata_violations)} metadata violations:")
+        for violation in metadata_violations:
+            print(f"  {violation}")
+
+    # TODO: Implement remaining validation steps
     # Step 4: Link & Date Integrity
     # Step 5: Index Management
     
