@@ -28,10 +28,39 @@ class Reporter:
     
     def print_summary(self, results: ValidationResult) -> int:
         """Print terminal summary and return appropriate exit code."""
-        # TODO: Implement summary printing with emojis
-        return 0
-    
+        print("\n" + "="*60)
+        print("📊 DOCUMENTATION VALIDATION SUMMARY")
+        print("="*60)
+
+        # Print each section
+        self.print_section("Missing READMEs", results.missing_readmes, "🚧")
+        self.print_section("Metadata violations", results.metadata_violations, "🚧")
+        self.print_section("Broken links", results.broken_links, "🚧")
+        self.print_section("Parent-date bumps applied", results.date_bumps, "🚧")
+        self.print_section("New index entries", results.new_index_entries, "✅")
+
+        # Calculate total issues
+        total_issues = (len(results.missing_readmes) +
+                       len(results.metadata_violations) +
+                       len(results.broken_links))
+
+        print("-"*60)
+        if total_issues == 0:
+            print("✅ All documentation checks passed!")
+            return 0
+        else:
+            print(f"🚧 Found {total_issues} documentation issues")
+            return 1
+
     def print_section(self, title: str, items: List[str], emoji: str) -> None:
         """Print a section of the report with emoji and items."""
-        # TODO: Implement section printing
-        pass
+        count = len(items)
+        print(f"\n{emoji} {title} ({count})")
+
+        if count > 0:
+            for item in items:
+                # Remove emoji from item if it's already there
+                clean_item = item.replace("🚧 ", "").replace("✅ ", "")
+                print(f"  • {clean_item}")
+        else:
+            print("  ✅ No issues found")

@@ -31,6 +31,7 @@ sys.path.insert(0, str(Path(__file__).parent / "src"))
 from src.utils import find_all_directories, find_all_markdown_files
 from src.indexer import DocumentationIndexer
 from src.reporter import Reporter, ValidationResult
+from src.validators.readme_validator import ReadmeValidator
 
 
 def parse_arguments() -> argparse.Namespace:
@@ -90,9 +91,21 @@ def main() -> int:
         new_index_entries=[]
     )
     
-    # TODO: Implement validation steps
     # Step 2: README Presence Validation
-    # Step 3: Metadata Format Enforcement  
+    if args.verbose:
+        print("📋 Checking README presence...")
+
+    readme_validator = ReadmeValidator(repo_path)
+    readme_violations = readme_validator.validate()
+    results.missing_readmes = readme_violations
+
+    if args.verbose and readme_violations:
+        print(f"Found {len(readme_violations)} missing READMEs:")
+        for violation in readme_violations:
+            print(f"  {violation}")
+
+    # TODO: Implement remaining validation steps
+    # Step 3: Metadata Format Enforcement
     # Step 4: Link & Date Integrity
     # Step 5: Index Management
     
