@@ -39,7 +39,7 @@ class Reporter:
         self.print_section("Date inconsistencies", results.date_bumps, "🚧")
         self.print_section("New index entries", results.new_index_entries, "✅")
 
-        # Calculate total issues
+        # Calculate total issues (date inconsistencies are warnings, not errors)
         total_issues = (len(results.missing_readmes) +
                        len(results.metadata_violations) +
                        len(results.broken_links))
