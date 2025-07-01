@@ -1,0 +1,38 @@
+# DocMan Configuration File
+# Documentation Management CLI Tool Configuration
+
+# Root directory for documentation scanning
+root_directory = "."
+
+# Index file management
+index_file = "DOCUMENTATION_INDEX.md"
+recreate_index = true
+
+# Validation settings
+strict_validation = true
+
+# Required metadata fields in README files
+required_metadata = [
+    "Status",
+    "Version", 
+    "Last Updated"
+]
+
+# Ignore patterns - directories and files to skip during scanning
+ignore_patterns = [
+    ".git/",
+    "node_modules/",
+    "venv/",
+    "__pycache__/",
+    "*.tmp",
+    "*.log"
+]
+
+# Output settings
+verbose_output = false
+colored_output = true
+emoji_indicators = true
+
+# Reporting settings
+generate_reports = true
+exit_on_errors = true
