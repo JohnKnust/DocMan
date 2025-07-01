@@ -15,19 +15,21 @@ help:
 	@echo "DocMan - Documentation Management CLI Tool"
 	@echo ""
 	@echo "Available targets:"
-	@echo "  install      - Install dependencies"
-	@echo "  check-syntax - Check Python syntax"
-	@echo "  run          - Run DocMan on current directory"
-	@echo "  run-fix      - Run DocMan with auto-fix enabled"
-	@echo "  run-verbose  - Run DocMan with verbose output"
-	@echo "  run-report   - Run DocMan with detailed report"
-	@echo "  validate     - Run all validation checks"
-	@echo "  test         - Run unit tests"
-	@echo "  lint         - Run linting checks"
-	@echo "  format       - Format code with black"
-	@echo "  type-check   - Run type checking with mypy"
-	@echo "  clean        - Clean up temporary files"
-	@echo "  quick-check  - Run quick syntax and basic tests"
+	@echo "  install          - Install dependencies"
+	@echo "  generate-examples- Generate example repository structure"
+	@echo "  check-syntax     - Check Python syntax"
+	@echo "  run              - Run DocMan on current directory"
+	@echo "  run-fix          - Run DocMan with auto-fix enabled"
+	@echo "  run-verbose      - Run DocMan with verbose output"
+	@echo "  run-report       - Run DocMan with detailed report"
+	@echo "  run-examples     - Generate examples and run DocMan on them"
+	@echo "  validate         - Run all validation checks"
+	@echo "  test             - Run unit tests"
+	@echo "  lint             - Run linting checks"
+	@echo "  format           - Format code with black"
+	@echo "  type-check       - Run type checking with mypy"
+	@echo "  clean            - Clean up temporary files"
+	@echo "  quick-check      - Run quick syntax and basic tests"
 
 # Install dependencies
 .PHONY: install
@@ -44,6 +46,12 @@ check-syntax:
 	$(PYTHON) -m py_compile $(SRC_DIR)/*.py
 	$(PYTHON) -m py_compile $(SRC_DIR)/validators/*.py
 	$(PYTHON) -m py_compile $(TEST_DIR)/*.py
+
+# Generate example structure
+.PHONY: generate-examples
+generate-examples:
+	@echo "🎨 Generating example structure..."
+	$(PYTHON) generate_examples.py
 
 # Run DocMan on current directory
 .PHONY: run
@@ -68,6 +76,12 @@ run-verbose:
 run-report:
 	@echo "📊 Running DocMan with detailed report..."
 	$(PYTHON) $(CLI_SCRIPT) --report
+
+# Run DocMan on generated examples
+.PHONY: run-examples
+run-examples: generate-examples
+	@echo "🧪 Running DocMan on generated examples..."
+	$(PYTHON) $(CLI_SCRIPT) examples/samplerepo --verbose
 
 # Run all validation checks
 .PHONY: validate

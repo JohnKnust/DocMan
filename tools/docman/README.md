@@ -31,13 +31,35 @@ pyenv local docman-env
 
 # Install dependencies
 make install
+
+# Generate example structure for testing
+python generate_examples.py
 ```
+
+### Example Structure Generation
+
+DocMan includes a script to generate example repository structures for testing and demonstration:
+
+```bash
+# Generate example structure
+python generate_examples.py
+
+# This creates examples/samplerepo/ with:
+# - Proper README.md files with metadata
+# - Directory structure mimicking real projects
+# - Test cases for validation (missing READMEs, broken links, etc.)
+```
+
+**Note**: The examples/ directory is not committed to git to keep the tool clean. Run the generation script whenever you need fresh examples.
 
 ### Basic Usage
 
 ```bash
 # Check current directory
 python cli.py
+
+# Check the generated example
+python cli.py examples/samplerepo
 
 # Check specific repository
 python cli.py /path/to/your/repo
