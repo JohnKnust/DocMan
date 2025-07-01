@@ -2,10 +2,10 @@ You are an AI development agent. Your goal is to build a fully generic, example-
 
 Phase 1 – MVP (complete)
 
-Implement a CLI under tools/docman/ that, when pointed at any repo root, will:
+Implement a CLI under docman/ that, when pointed at any repo root, will:
 
 1.	Scaffold the project
-	•	Create tools/docman/ containing:
+	•	Create docman/ containing:
 	•	cli.py entry script
 	•	src/ modules (validators/, indexer.py, reporter.py, utils/)
 	•	tests/ with empty test stubs
@@ -120,7 +120,7 @@ Phase 4 – MkDocs + Docker Navigation (Ausblick)
 
 Phase 5 – Out-of-the-Box Scaffolding
 	•	Provide a Cookiecutter or npm init docman-template:
-	•	Generates the full tools/docman/ CLI scaffold
+	•	Generates the full docman/ CLI scaffold
 	•	Includes example tree (examples/samplerepo/)
 	•	Supplies sample DOCUMENTATION_INDEX.md, README.md, Makefile
 

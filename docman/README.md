@@ -23,7 +23,7 @@ A generic, example-driven Documentation Management CLI tool that can be dropped 
 ```bash
 # Clone and setup
 git clone <repository-url>
-cd DocMan/tools/docman
+cd DocMan/docman
 
 # Setup Python 3.11 environment
 pyenv virtualenv 3.11.0 docman-env
@@ -209,7 +209,7 @@ make validate
 ### Project Structure
 
 ```
-tools/docman/
+docman/
 ├── cli.py                 # Main CLI entry point
 ├── src/                   # Source code
 │   ├── validators/        # Validation modules

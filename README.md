@@ -10,12 +10,12 @@ A comprehensive, example-driven Documentation Management System that users can d
 
 DocMan is a generic Documentation Management CLI tool with VS Code integration, designed to validate and maintain documentation standards in any repository. The system provides real-time validation, intelligent diagnostics, and powerful automation features.
 
-> **📝 Important**: DocMan uses script-generated examples to keep the repository clean. The `examples/` directory is not committed to git - run `make generate-examples` in `tools/docman/` to create test examples when needed.
+> **📝 Important**: DocMan uses script-generated examples to keep the repository clean. The `examples/` directory is not committed to git - run `make generate-examples` in `docman/` to create test examples when needed.
 
 ## 🚀 Current Project Status
 
 ### ✅ Phase 1 - MVP (Complete)
-**CLI Tool under `tools/docman/`**
+**CLI Tool under `docman/`**
 
 - **📋 README Presence Validation**: Recursive checking of all directories for README.md files
 - **📝 Metadata Format Enforcement**: Validation of Status, Version, and Last Updated fields
@@ -45,7 +45,7 @@ DocMan/
 ├── 📄 .gitignore                  # Git ignore rules
 ├── 📄 DOCUMENTATION_INDEX.md      # Auto-generated index
 │
-├── 🛠️ tools/docman/               # Phase 1: CLI Tool
+├── 🛠️ docman/                     # Phase 1: CLI Tool
 │   ├── 📄 cli.py                  # Main CLI entry point
 │   ├── 📄 Makefile                # Development commands
 │   ├── 📄 README.md               # CLI documentation
@@ -95,7 +95,7 @@ pyenv virtualenv 3.11.0 docman-env
 pyenv local docman-env
 
 # Navigate to CLI directory
-cd tools/docman
+cd docman
 
 # Install dependencies
 make install
@@ -114,7 +114,7 @@ make run-examples
 ```bash
 # Examples are NOT committed to git
 # Generate them when needed:
-cd tools/docman
+cd docman
 make generate-examples
 
 # This creates examples/samplerepo/ with:
@@ -204,7 +204,7 @@ make test                        # Run tests
 {
   "docman.autoValidateOnSave": true,
   "docman.pythonPath": "python",
-  "docman.cliPath": "./tools/docman/cli.py",
+  "docman.cliPath": "./docman/cli.py",
   "docman.showInlineDecorations": true,
   "docman.validationDelay": 500
 }
@@ -214,7 +214,7 @@ make test                        # Run tests
 
 ### CLI Tests
 ```bash
-cd tools/docman
+cd docman
 make test                        # All tests
 python -m pytest tests/ -v      # Pytest directly
 make lint                        # Code quality
@@ -310,7 +310,7 @@ pyenv virtualenv 3.11.0 docman-env
 pyenv local docman-env
 
 # Develop CLI
-cd tools/docman
+cd docman
 make install
 make test
 
@@ -343,7 +343,7 @@ npm run compile                  # TypeScript compilation
 python --version  # Should be 3.11+
 
 # Reinstall dependencies
-cd tools/docman
+cd docman
 pip install -r requirements.txt
 
 # Check configuration
@@ -363,7 +363,7 @@ npm run compile
 ```
 
 #### Validation failing
-1. **Check paths**: Ensure `tools/docman/cli.py` exists
+1. **Check paths**: Ensure `docman/cli.py` exists
 2. **Python path**: Configure `docman.pythonPath` in VS Code Settings
 3. **Permissions**: Ensure CLI is executable
 4. **Check logs**: VS Code Output Panel → Select "DocMan"
@@ -371,7 +371,7 @@ npm run compile
 ## 📞 Support
 
 ### Documentation
-- **CLI Documentation**: `tools/docman/README.md`
+- **CLI Documentation**: `docman/README.md`
 - **Extension Documentation**: `vscode-extension/README.md`
 - **Configuration**: See `.docmanrc` examples
 - **Troubleshooting**: Detailed guides in respective READMEs
