@@ -10,6 +10,8 @@ A comprehensive, example-driven Documentation Management System that users can d
 
 DocMan is a generic Documentation Management CLI tool with VS Code integration, designed to validate and maintain documentation standards in any repository. The system provides real-time validation, intelligent diagnostics, and powerful automation features.
 
+> **📝 Important**: DocMan uses script-generated examples to keep the repository clean. The `examples/` directory is not committed to git - run `make generate-examples` in `tools/docman/` to create test examples when needed.
+
 ## 🚀 Current Project Status
 
 ### ✅ Phase 1 - MVP (Complete)
@@ -105,7 +107,33 @@ make generate-examples
 make run-examples
 ```
 
-### 2. VS Code Extension Setup
+### 2. Example Structure (Important!)
+
+**DocMan uses script-generated examples to keep the repository clean:**
+
+```bash
+# Examples are NOT committed to git
+# Generate them when needed:
+cd tools/docman
+make generate-examples
+
+# This creates examples/samplerepo/ with:
+# - Complete directory structure
+# - README files with proper metadata
+# - Test cases for validation
+# - DOCUMENTATION_INDEX.md
+
+# Test DocMan on the generated examples:
+make run-examples
+```
+
+**Why this approach?**
+- ✅ Keeps the tool repository clean and lightweight
+- ✅ Examples are always fresh and consistent
+- ✅ Easy to modify examples by updating the script
+- ✅ No example files cluttering git history
+
+### 3. VS Code Extension Setup
 ```bash
 # Navigate to extension directory
 cd vscode-extension

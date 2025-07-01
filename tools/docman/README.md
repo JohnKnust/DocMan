@@ -52,6 +52,28 @@ python generate_examples.py
 
 **Note**: The examples/ directory is not committed to git to keep the tool clean. Run the generation script whenever you need fresh examples.
 
+### Typical Workflow
+
+```bash
+# 1. First time setup
+make install                    # Install dependencies
+make generate-examples         # Create example structure
+
+# 2. Test DocMan on examples
+make run-examples              # Generate + run DocMan on examples
+# OR step by step:
+python generate_examples.py    # Generate examples
+python cli.py examples/samplerepo --verbose  # Run DocMan
+
+# 3. Use on your own repository
+python cli.py /path/to/your/repo --verbose
+
+# 4. Development workflow
+make test                      # Run unit tests
+make lint                      # Check code quality
+make format                    # Format code
+```
+
 ### Basic Usage
 
 ```bash
