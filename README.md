@@ -1,8 +1,8 @@
 # DocMan - Documentation Management System
 
-**Status**: 🚧 In Development
-**Version**: 0.2.0
-**Last Updated**: 2025-01-15
+**Status**: ✅ Production Ready
+**Version**: 1.0.0
+**Last Updated**: 2025-07-02
 
 A comprehensive, example-driven Documentation Management System that users can drop into any monorepo - with immediate validation and automation for high-quality documentation.
 
@@ -14,14 +14,17 @@ DocMan is a generic Documentation Management CLI tool with VS Code integration, 
 
 ## 🚀 Current Project Status
 
-### ✅ Phase 1 - MVP (Complete)
-**CLI Tool under `docman/`**
+### ✅ Phase 1 - MVP (Complete) - V1.0.0
+**CLI Tool under `docman/` - Production Ready**
 
 - **📋 README Presence Validation**: Recursive checking of all directories for README.md files
 - **📝 Metadata Format Enforcement**: Validation of Status, Version, and Last Updated fields
 - **🔗 Link & Date Integrity**: Verification of Markdown links and date consistency
 - **📚 Index Management**: Automatic management of DOCUMENTATION_INDEX.md
+- **⚙️ Flexible Configuration System**: Smart .docmanrc loading with submodule support and fallback
+- **🔄 Submodule-Ready**: Clean separation of configuration and code for easy submodule integration
 - **📊 Reporting & Exit Codes**: Comprehensive reports with emoji indicators
+- **💡 User-Friendly**: Clear feedback with fallback warnings and helpful configuration guidance
 - **🧪 Tests & Documentation**: Complete test suite and documentation
 
 ### ✅ Phase 2 - VS Code Extension (Complete)
@@ -150,12 +153,14 @@ code . && F5
 
 ## 🎯 Key Features
 
-### CLI Tool Features
+### CLI Tool Features (V1.0.0)
 - **📋 Automatic README Validation** in all directories
 - **📝 Metadata Format Enforcement** with configurable rules
 - **🔗 Link Integrity Checking** for internal Markdown links
 - **📚 Automatic Index Management** for DOCUMENTATION_INDEX.md
-- **⚙️ Configurable Ignore Patterns** via .docmanrc
+- **⚙️ Smart Configuration Loading** with submodule support and fallback
+- **🔄 Submodule-Ready Design** with clean configuration separation
+- **💡 User-Friendly Feedback** with clear fallback warnings
 - **📊 Detailed Reports** with exit codes for CI/CD
 
 ### VS Code Extension Features
@@ -173,7 +178,8 @@ code . && F5
 ```bash
 python cli.py                    # Check current directory
 python cli.py --verbose          # With detailed output
-python cli.py --create-config    # Create .docmanrc
+python cli.py --create-config    # Create configuration template
+python cli.py /path/to/repo      # Check specific repository
 make run                         # Via Makefile
 make test                        # Run tests
 ```
@@ -189,15 +195,38 @@ make test                        # Run tests
 ## ⚙️ Configuration
 
 ### .docmanrc (Project Configuration)
-```json
-{
-  "ignorePatterns": [".git", "node_modules", "venv", "__pycache__", "core"],
-  "requiredMetadata": ["Status", "Version", "Last Updated"],
-  "validStatuses": ["✅ Production Ready", "🚧 Draft", "🚫 Deprecated"],
-  "autoFix": false,
-  "verbose": false
-}
+
+DocMan uses a smart configuration system designed for submodule usage with automatic fallback:
+
+**🏗️ Recommended Structure:**
 ```
+your-project/
+├── .docmanrc          # Your configuration
+├── DocMan/            # DocMan submodule
+│   ├── .docmanrc.template  # Template (fallback)
+│   └── docman/        # CLI tool
+└── your-files...
+```
+
+**🚀 Quick Setup:**
+```bash
+# Create and customize configuration
+cd DocMan/docman
+python cli.py --create-config
+cp ../.docmanrc.template ../../.docmanrc
+nano ../../.docmanrc
+
+# Run validation
+python cli.py --verbose
+```
+
+**💡 Smart Features:**
+- **Automatic Configuration Discovery**: Searches multiple locations
+- **Fallback Support**: Uses template if no config found
+- **Clear Feedback**: Shows configuration status and fallback warnings
+- **Environment Override**: `DOCMAN_CONFIG` variable support
+
+> 📚 **For detailed configuration options and technical details, see [CHANGELOG.md](CHANGELOG.md)**
 
 ### VS Code Settings
 ```json

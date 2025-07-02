@@ -26,11 +26,31 @@ def should_ignore_path(path: Path, ignore_patterns: Set[str] = None) -> bool:
     """Check if a path should be ignored based on ignore patterns."""
     if ignore_patterns is None:
         ignore_patterns = DEFAULT_IGNORE_PATTERNS
-    
+
+    # Convert path to string for pattern matching
+    path_str = str(path)
+
     # Check if any part of the path matches ignore patterns
     for part in path.parts:
+        # Direct part match
         if part in ignore_patterns:
             return True
+        # Pattern with trailing slash
+        if f"{part}/" in ignore_patterns:
+            return True
+
+    # Check for pattern matches in the full path
+    for pattern in ignore_patterns:
+        if pattern.endswith('/'):
+            # Directory pattern
+            if f"/{pattern}" in f"/{path_str}/" or path_str.startswith(pattern[:-1]):
+                return True
+        elif '*' in pattern:
+            # Wildcard pattern
+            import fnmatch
+            if fnmatch.fnmatch(path.name, pattern):
+                return True
+
     return False
 
 

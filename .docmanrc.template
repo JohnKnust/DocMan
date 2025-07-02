@@ -1,5 +1,12 @@
-# DocMan Configuration File
-# Documentation Management CLI Tool Configuration
+# DocMan Configuration Template
+# Copy this file to .docmanrc in your project root and customize as needed
+# 
+# For submodule usage: Place this file in the parent directory of the docman/ folder
+# Example structure:
+#   your-project/
+#   ├── .docmanrc          # This configuration file
+#   ├── docman/            # DocMan submodule
+#   └── your-files...
 
 # Root directory for documentation scanning
 root_directory = "."

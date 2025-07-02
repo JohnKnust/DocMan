@@ -1,10 +1,10 @@
 # DocMan - Documentation Management CLI Tool
 
-**Status**: ✅ Production Ready  
-**Version**: 0.1.0  
-**Last Updated**: 2025-06-12
+**Status**: ✅ Production Ready
+**Version**: 1.0.0
+**Last Updated**: 2025-07-02
 
-A generic, example-driven Documentation Management CLI tool that can be dropped into any monorepo to validate and maintain documentation standards.
+A generic, example-driven Documentation Management CLI tool that can be dropped into any monorepo to validate and maintain documentation standards. **V1.0.0 - Production Ready with smart configuration loading and submodule support.**
 
 ## Features
 
@@ -230,6 +230,83 @@ docman/
 - **1**: Issues found (missing READMEs, metadata violations, broken links)
 
 Note: Date inconsistencies are reported as warnings and don't affect the exit code.
+
+## ⚙️ Configuration
+
+DocMan uses a flexible configuration loading strategy designed for submodule usage.
+
+### Configuration File Location
+
+DocMan searches for `.docmanrc` in the following order:
+1. **DOCMAN_CONFIG environment variable** (if set)
+2. **Parent directory of docman/ folder** (recommended for submodules)
+3. Current working directory
+4. Parent directories up to git root
+5. Default configuration (fallback)
+
+### Recommended Structure for Submodules
+
+```
+your-project/
+├── .docmanrc          # Configuration file (recommended location)
+├── docman/            # DocMan submodule
+│   ├── .docmanrc.template  # Template file
+│   └── ...
+└── your-files...
+```
+
+### Quick Setup
+
+```bash
+# Create configuration template
+python cli.py --create-config
+
+# Copy template to project root (if using as submodule)
+cp .docmanrc.template ../.docmanrc
+
+# Edit configuration as needed
+nano ../.docmanrc  # or nano .docmanrc if in same directory
+```
+
+### Configuration Format
+
+```ini
+# DocMan Configuration File
+root_directory = "."
+index_file = "DOCUMENTATION_INDEX.md"
+recreate_index = true
+strict_validation = true
+
+required_metadata = [
+    "Status",
+    "Version",
+    "Last Updated"
+]
+
+ignore_patterns = [
+    ".git/",
+    "node_modules/",
+    "venv/",
+    "__pycache__/",
+    "*.tmp",
+    "*.log"
+]
+
+verbose_output = false
+colored_output = true
+emoji_indicators = true
+generate_reports = true
+exit_on_errors = true
+```
+
+### Environment Variable Override
+
+You can override the configuration file location:
+
+```bash
+export DOCMAN_CONFIG="/path/to/custom/.docmanrc"
+python cli.py
+```
 
 ## Contributing
 
