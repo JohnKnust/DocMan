@@ -3,10 +3,10 @@ import * as fs from 'fs';
 import * as path from 'path';
 
 export interface DocManConfig {
-    valid_statuses?: string[];
-    required_metadata?: string[];
-    version_pattern?: string;
-    date_format?: string;
+    valid_statuses: string[];
+    required_metadata: string[];
+    version_pattern: string;
+    date_format: string;
 }
 
 export class ConfigManager {
@@ -99,125 +99,6 @@ export class ConfigManager {
         return status;
     }
 
-    async getDocManConfig(): Promise<DocManConfig> {
-        const configPath = await this.findConfigFile();
-        if (!configPath) {
-            return this.getDefaultDocManConfig();
-        }
-
-        try {
-            const configContent = fs.readFileSync(configPath, 'utf8');
-            return this.parseDocManConfig(configContent);
-        } catch (error) {
-            console.warn('Failed to parse .docmanrc, using defaults:', error);
-            return this.getDefaultDocManConfig();
-        }
-    }
-
-    private parseDocManConfig(content: string): DocManConfig {
-        const config: DocManConfig = {};
-        const lines = content.split('\n');
-
-        let currentArray: string[] = [];
-        let currentKey = '';
-        let inArray = false;
-
-        for (const line of lines) {
-            const trimmed = line.trim();
-
-            // Skip comments and empty lines
-            if (!trimmed || trimmed.startsWith('#')) {
-                continue;
-            }
-
-            // Handle array end
-            if (inArray && trimmed === ']') {
-                if (currentKey === 'valid_statuses') {
-                    config.valid_statuses = currentArray;
-                } else if (currentKey === 'required_metadata') {
-                    config.required_metadata = currentArray;
-                }
-                inArray = false;
-                currentArray = [];
-                currentKey = '';
-                continue;
-            }
-
-            // Handle array items
-            if (inArray) {
-                const match = trimmed.match(/^"([^"]*)"[,]?$/);
-                if (match) {
-                    currentArray.push(match[1]);
-                }
-                continue;
-            }
-
-            // Handle array start
-            if (trimmed.includes('=') && trimmed.includes('[')) {
-                const match = trimmed.match(/(\w+)\s*=\s*\[/);
-                if (match) {
-                    currentKey = match[1];
-                    inArray = true;
-
-                    // Check if it's a single line array
-                    if (trimmed.includes(']')) {
-                        const singleLineMatch = trimmed.match(/(\w+)\s*=\s*\[(.*?)\]/);
-                        if (singleLineMatch) {
-                            const values = singleLineMatch[2]
-                                .split(',')
-                                .map(v => v.replace(/[",]/g, '').trim())
-                                .filter(v => v);
-
-                            if (currentKey === 'valid_statuses') {
-                                config.valid_statuses = values;
-                            } else if (currentKey === 'required_metadata') {
-                                config.required_metadata = values;
-                            }
-                            inArray = false;
-                            currentArray = [];
-                            currentKey = '';
-                        }
-                    }
-                }
-                continue;
-            }
-
-            // Handle simple key-value pairs
-            const match = trimmed.match(/(\w+)\s*=\s*"?([^"]*)"?/);
-            if (match) {
-                const key = match[1];
-                const value = match[2].trim();
-
-                if (key === 'version_pattern') {
-                    config.version_pattern = value;
-                } else if (key === 'date_format') {
-                    config.date_format = value;
-                }
-            }
-        }
-
-        return config;
-    }
-
-    private getDefaultDocManConfig(): DocManConfig {
-        return {
-            valid_statuses: [
-                "✅ Production Ready",
-                "🚧 Draft",
-                "🚫 Deprecated",
-                "⚠️ Experimental",
-                "🔄 In Progress"
-            ],
-            required_metadata: [
-                "Status",
-                "Version",
-                "Last Updated"
-            ],
-            version_pattern: "semantic",
-            date_format: "YYYY-MM-DD"
-        };
-    }
-
     private getDefaultConfig(): string {
         return `# DocMan Configuration
 # Copy this file to .docmanrc in your project root and customize as needed
@@ -267,5 +148,106 @@ date_bump_threshold_days = 30
 validate_links = true
 link_timeout_seconds = 5
 `;
+    }
+
+    async getDocManConfig(): Promise<DocManConfig> {
+        const configPath = await this.findConfigFile();
+
+        if (!configPath) {
+            return this.getDefaultDocManConfig();
+        }
+
+        try {
+            const configContent = fs.readFileSync(configPath, 'utf8');
+            return this.parseDocManConfig(configContent);
+        } catch (error) {
+            console.warn('Failed to parse DocMan config, using defaults:', error);
+            return this.getDefaultDocManConfig();
+        }
+    }
+
+    private parseDocManConfig(content: string): DocManConfig {
+        const config = this.getDefaultDocManConfig();
+        const lines = content.split('\n');
+
+        for (let i = 0; i < lines.length; i++) {
+            const line = lines[i].trim();
+
+            // Skip comments and empty lines
+            if (!line || line.startsWith('#')) {
+                continue;
+            }
+
+            // Handle multiline arrays
+            if (line.includes('[') && !line.includes(']')) {
+                const key = line.split('=')[0].trim();
+                const items: string[] = [];
+
+                // Extract first item if present
+                const firstItem = line.split('[')[1]?.trim();
+                if (firstItem && firstItem !== '') {
+                    items.push(firstItem.replace(/[",]/g, '').trim());
+                }
+
+                // Continue reading until closing bracket
+                i++;
+                while (i < lines.length && !lines[i].includes(']')) {
+                    const item = lines[i].trim().replace(/[",]/g, '').trim();
+                    if (item && !item.startsWith('#')) {
+                        items.push(item);
+                    }
+                    i++;
+                }
+
+                // Handle last item with closing bracket
+                if (i < lines.length && lines[i].includes(']')) {
+                    const lastItem = lines[i].split(']')[0].trim().replace(/[",]/g, '').trim();
+                    if (lastItem) {
+                        items.push(lastItem);
+                    }
+                }
+
+                if (key === 'valid_statuses') {
+                    config.valid_statuses = items.filter(item => item.length > 0);
+                } else if (key === 'required_metadata') {
+                    config.required_metadata = items.filter(item => item.length > 0);
+                }
+                continue;
+            }
+
+            // Handle simple key-value pairs
+            const match = line.match(/(\w+)\s*=\s*"?([^"]*)"?/);
+            if (match) {
+                const key = match[1];
+                const value = match[2].trim();
+
+                if (key === 'version_pattern') {
+                    config.version_pattern = value;
+                } else if (key === 'date_format') {
+                    config.date_format = value;
+                }
+            }
+        }
+
+        return config;
+    }
+
+    private getDefaultDocManConfig(): DocManConfig {
+        return {
+            valid_statuses: [
+                "✅ Production Ready",
+                "🚧 Draft",
+                "🚫 Deprecated",
+                "⚠️ Experimental",
+                "🔄 In Progress"
+            ],
+            required_metadata: [
+                "Status",
+                "Version",
+                "Last Updated"
+            ],
+            version_pattern: "semantic",
+            date_format: "YYYY-MM-DD"
+        };
     }
 }

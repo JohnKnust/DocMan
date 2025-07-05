@@ -1,5 +1,9 @@
 # DocMan - Documentation Validator
 
+**Status**: ✅ Production Ready
+**Version**: 1.2.6
+**Last Updated**: 2025-07-05
+
 **Configurable documentation validation** that adapts to YOUR project's needs. Define your metadata requirements, status values, and validation rules in `.docmanrc` - DocMan validates accordingly with **real-time error detection** and **auto-fixes**.
 
 ## ⚙️ **Configuration-Driven Validation**
@@ -32,12 +36,19 @@ date_format = "YYYY-MM-DD"   # or your format
 - **⚡ Smart quick fixes** - Suggests YOUR configured metadata fields
 - **📊 Workspace overview** - Validates entire project with YOUR rules
 - **🔧 Auto-discovery** - Finds .docmanrc in workspace, parent, or grandparent directories
+- **🎛️ Per-project activation** - Only activates when you want it, no unnecessary irritation
 
 ## 🚀 Quick Start
 
 ### **1. Install Extension**
+**Preferred method:** VS Code UI import
+- Open VS Code Extensions panel
+- Click `...` → `Install from VSIX`
+- Select `docman-vscode-1.2.6.vsix`
+
+**Alternative:** Command line
 ```bash
-code --install-extension docman-vscode-1.2.1.vsix
+code --install-extension docman-vscode-1.2.6.vsix
 ```
 
 ### **2. Install/Configure CLI**
@@ -49,11 +60,26 @@ code --install-extension docman-vscode-1.2.1.vsix
 git submodule add https://github.com/your-repo/DocMan.git
 ```
 
-### **3. Create Configuration**
-```bash
-# Use Command Palette: "DocMan: Open Configuration File"
-# Or create manually:
+### **3. Automatic Setup & Activation**
+**With existing config:** When you open a project with `.docmanrc`, DocMan will ask:
 ```
+DocMan configuration detected. Enable validation for this workspace?
+[Enable] [Not now] [Never for this workspace]
+```
+
+**Without config:** When no config is found, DocMan offers to create one:
+```
+DocMan extension is installed but no configuration found.
+Would you like to create a .docmanrc configuration?
+[Create Config] [Not now] [Never for this workspace]
+```
+
+**Manual control:** Use Command Palette: **"DocMan: Toggle Activation for Workspace"**
+
+### **4. Configuration Options**
+**Automatic:** Choose "Create Config" when prompted (recommended)
+
+**Manual:** Use Command Palette: "DocMan: Open Configuration File"
 
 ```toml
 # .docmanrc - Place in project root or parent directory
@@ -65,9 +91,10 @@ valid_statuses = [
 ]
 ```
 
-### **4. Start Validating**
+### **5. Start Validating**
 - Open any `.md` file
 - See real-time validation in Problems Panel
+- Use quick fixes (💡) for instant corrections
 - Use quick fixes for instant corrections
 
 ## 🔧 Configuration

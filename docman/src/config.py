@@ -37,9 +37,10 @@ class DocManConfig:
     # Ignore patterns
     ignore_patterns: Set[str] = field(default_factory=lambda: {
         ".git/",
-        "node_modules/", 
+        "node_modules/",
         "venv/",
         "__pycache__/",
+        "vscode-extension/",
         "*.tmp",
         "*.log",
         "core"
@@ -135,7 +136,6 @@ class ConfigLoader:
         3. Parent directory of DocMan submodule
         4. Current working directory
         5. Parent directories up to git root
-        6. Template file as fallback
         """
 
         # 1. Check environment variable override
@@ -174,11 +174,7 @@ class ConfigLoader:
             if (parent / ".git").exists() or parent == parent.parent:
                 break
 
-        # 6. Fallback to template file
-        template_config = self.docman_dir.parent / f"{self.config_filename}.template"
-        if template_config.exists():
-            return template_config
-
+        # No configuration file found
         return None
     
     def _load_from_file(self, config: DocManConfig, config_path: Path):
@@ -444,6 +440,7 @@ required_metadata = [
 ]
 
 # Valid status values (customize these for your project)
+# Note: The first value is used as default status when creating new README files
 valid_statuses = [
     "✅ Production Ready",
     "🚧 Draft",
@@ -468,6 +465,7 @@ ignore_patterns = [
     "node_modules/",
     "venv/",
     "__pycache__/",
+    "vscode-extension/",
     "*.tmp",
     "*.log"
 ]

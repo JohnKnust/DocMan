@@ -1,5 +1,47 @@
 # DocMan VS Code Extension - Changelog
 
+**Status**: ✅ Production Ready
+**Version**: 1.2.6
+**Last Updated**: 2025-07-05
+
+## [1.2.6] - 2025-07-05
+
+### 🚀 Enhanced Activation Logic - No More Dead Ends!
+- **Smart config creation**: When extension is installed but no config detected, now prompts to create `.docmanrc` automatically
+- **Seamless workflow**: Install → Prompted to create config → Automatically enabled and ready to use
+- **No dead ends**: Extension always offers a path forward instead of staying silently disabled
+- **Improved user experience**: Clear workflow with automatic enablement after config creation
+
+### 🔧 Technical Improvements
+- **Fixed activation logic**: Replaced passive "stay disabled" behavior with proactive config creation offer
+- **Enhanced prompts**: Better messaging that guides users through setup process
+- **Automatic enablement**: Once config is created, DocMan is immediately ready to use
+
+### 📋 Installation Method Updates
+- **Preferred method**: VS Code UI import via Extensions panel → ... → Install from VSIX
+- **Updated documentation**: Clearer installation instructions with method preferences
+
+## [1.2.5] - 2025-07-05
+
+### 🚀 New Features - Workspace-based Activation
+- **Per-project activation**: DocMan now requires explicit activation per workspace to avoid unnecessary user irritation
+- **Smart detection**: Automatically prompts for activation when `.docmanrc` configuration is detected
+- **Status bar toggle**: Click status bar to enable/disable DocMan for current workspace
+- **Persistent settings**: Workspace activation preference is remembered across VS Code sessions
+
+### ✨ Enhanced Quick Fixes
+- **Dynamic README creation**: README templates now use configuration-based metadata fields
+- **Configuration-aware metadata**: Quick fixes respect your `.docmanrc` settings for required fields and valid statuses
+- **Improved user experience**: More intuitive activation flow with clear user choices
+
+### 🔧 Technical Improvements
+- **Removed static template dependency**: No longer relies on `.docmanrc.template` file
+- **Better error handling**: Improved configuration parsing and fallback mechanisms
+- **Enhanced TypeScript support**: Complete type definitions for configuration management
+
+### 📋 Commands Added
+- **DocMan: Toggle Activation for Workspace** - Enable/disable DocMan for current project
+
 ## [1.2.4] - 2025-07-04
 
 ### 🐛 Fixed - Critical Config Parsing Implementation

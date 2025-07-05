@@ -4,71 +4,32 @@ This file contains links to all documentation in the repository.
 
 
 ## Project Root
-- [CHANGELOG.md](CHANGELOG.md) – 🚧 Draft – 2025-01-01
-- [InstructionSet.md](InstructionSet.md) – 🚧 Draft – 2025-01-01
-- [README.md](README.md) – ✅ Production Ready – 2025-07-02
-- [DOCUMENTATION_INDEX.md](DOCUMENTATION_INDEX.md) – 🚧 Draft – 2025-01-01
+- [CHANGELOG.md](CHANGELOG.md) – ✅ Production Ready – 2025-07-05
+- [InstructionSet.md](InstructionSet.md) – ✅ Production Ready – 2025-07-05
+- [README.md](README.md) – ✅ Production Ready – 2025-07-05
+- [USER_STORY_TESTS.md](USER_STORY_TESTS.md) – ✅ Production Ready – 2025-07-05
 
 
-## Other
-- [docman/README.md](docman/README.md) – ✅ Production Ready – 2025-07-02
-- [docman/examples/samplerepo/README.md](docman/examples/samplerepo/README.md) – ✅ Production Ready – 2025-06-10
+## Docman
+- [docman/README.md](docman/README.md) – ✅ Production Ready – 2025-07-05
 - [docman/examples/samplerepo/DOCUMENTATION_INDEX.md](docman/examples/samplerepo/DOCUMENTATION_INDEX.md) – 🚧 Draft – 2025-01-01
-- [docman/examples/samplerepo/tools/README.md](docman/examples/samplerepo/tools/README.md) – ✅ Production Ready – 2025-06-12
-- [docman/examples/samplerepo/tools/documentation_maintenance/README.md](docman/examples/samplerepo/tools/documentation_maintenance/README.md) – ✅ Production Ready – 2025-06-10
+- [docman/examples/samplerepo/README.md](docman/examples/samplerepo/README.md) – ✅ Production Ready – 2025-06-10
+- [docman/examples/samplerepo/apps/README.md](docman/examples/samplerepo/apps/README.md) – ✅ Production Ready – 2025-06-12
+- [docman/examples/samplerepo/apps/llm/README.md](docman/examples/samplerepo/apps/llm/README.md) – ✅ Production Ready – 2025-06-12
+- [docman/examples/samplerepo/apps/llm/phi4/README.md](docman/examples/samplerepo/apps/llm/phi4/README.md) – ✅ Production Ready – 2025-06-08
 - [docman/examples/samplerepo/libs/README.md](docman/examples/samplerepo/libs/README.md) – ✅ Production Ready – 2025-06-12
 - [docman/examples/samplerepo/libs/config_utils/README.md](docman/examples/samplerepo/libs/config_utils/README.md) – 🚧 Draft – 2025-05-15
 - [docman/examples/samplerepo/libs/data_processing/README.md](docman/examples/samplerepo/libs/data_processing/README.md) – 🚧 Draft – 2025-06-12
 - [docman/examples/samplerepo/libs/phi4_monitoring/README.md](docman/examples/samplerepo/libs/phi4_monitoring/README.md) – ✅ Production Ready – 2025-06-05
-- [docman/examples/samplerepo/apps/README.md](docman/examples/samplerepo/apps/README.md) – ✅ Production Ready – 2025-06-12
-- [docman/examples/samplerepo/apps/llm/README.md](docman/examples/samplerepo/apps/llm/README.md) – ✅ Production Ready – 2025-06-12
-- [docman/examples/samplerepo/apps/llm/phi4/README.md](docman/examples/samplerepo/apps/llm/phi4/README.md) – ✅ Production Ready – 2025-06-08
-- [vscode-extension/CHANGELOG.md](vscode-extension/CHANGELOG.md) – 🚧 Draft – 2025-01-01
-- [vscode-extension/README.md](vscode-extension/README.md) – 🚧 Draft – 2025-01-01
-- [vscode-extension/README-new.md](vscode-extension/README-new.md) – 🚧 Draft – 2025-01-01
-- [vscode-extension/.vscode-test/vscode-darwin-arm64-1.101.2/Visual Studio Code.app/Contents/Resources/app/extensions/terminal-suggest/README.md](vscode-extension/.vscode-test/vscode-darwin-arm64-1.101.2/Visual Studio Code.app/Contents/Resources/app/extensions/terminal-suggest/README.md) – 🚧 Draft – 2025-01-01
-- [vscode-extension/.vscode-test/vscode-darwin-arm64-1.101.2/Visual Studio Code.app/Contents/Resources/app/extensions/terminal-suggest/dist/fig/README.md](vscode-extension/.vscode-test/vscode-darwin-arm64-1.101.2/Visual Studio Code.app/Contents/Resources/app/extensions/terminal-suggest/dist/fig/README.md) – 🚧 Draft – 2025-01-01
-- [vscode-extension/.vscode-test/vscode-darwin-arm64-1.101.2/Visual Studio Code.app/Contents/Resources/app/extensions/merge-conflict/README.md](vscode-extension/.vscode-test/vscode-darwin-arm64-1.101.2/Visual Studio Code.app/Contents/Resources/app/extensions/merge-conflict/README.md) – 🚧 Draft – 2025-01-01
-- [vscode-extension/.vscode-test/vscode-darwin-arm64-1.101.2/Visual Studio Code.app/Contents/Resources/app/extensions/media-preview/README.md](vscode-extension/.vscode-test/vscode-darwin-arm64-1.101.2/Visual Studio Code.app/Contents/Resources/app/extensions/media-preview/README.md) – 🚧 Draft – 2025-01-01
-- [vscode-extension/.vscode-test/vscode-darwin-arm64-1.101.2/Visual Studio Code.app/Contents/Resources/app/extensions/ms-vscode.js-debug-companion/README.md](vscode-extension/.vscode-test/vscode-darwin-arm64-1.101.2/Visual Studio Code.app/Contents/Resources/app/extensions/ms-vscode.js-debug-companion/README.md) – 🚧 Draft – 2025-01-01
-- [vscode-extension/.vscode-test/vscode-darwin-arm64-1.101.2/Visual Studio Code.app/Contents/Resources/app/extensions/ms-vscode.js-debug-companion/SECURITY.md](vscode-extension/.vscode-test/vscode-darwin-arm64-1.101.2/Visual Studio Code.app/Contents/Resources/app/extensions/ms-vscode.js-debug-companion/SECURITY.md) – 🚧 Draft – 2025-01-01
-- [vscode-extension/.vscode-test/vscode-darwin-arm64-1.101.2/Visual Studio Code.app/Contents/Resources/app/extensions/theme-seti/README.md](vscode-extension/.vscode-test/vscode-darwin-arm64-1.101.2/Visual Studio Code.app/Contents/Resources/app/extensions/theme-seti/README.md) – 🚧 Draft – 2025-01-01
-- [vscode-extension/.vscode-test/vscode-darwin-arm64-1.101.2/Visual Studio Code.app/Contents/Resources/app/extensions/html-language-features/README.md](vscode-extension/.vscode-test/vscode-darwin-arm64-1.101.2/Visual Studio Code.app/Contents/Resources/app/extensions/html-language-features/README.md) – 🚧 Draft – 2025-01-01
-- [vscode-extension/.vscode-test/vscode-darwin-arm64-1.101.2/Visual Studio Code.app/Contents/Resources/app/extensions/simple-browser/README.md](vscode-extension/.vscode-test/vscode-darwin-arm64-1.101.2/Visual Studio Code.app/Contents/Resources/app/extensions/simple-browser/README.md) – 🚧 Draft – 2025-01-01
-- [vscode-extension/.vscode-test/vscode-darwin-arm64-1.101.2/Visual Studio Code.app/Contents/Resources/app/extensions/json-language-features/README.md](vscode-extension/.vscode-test/vscode-darwin-arm64-1.101.2/Visual Studio Code.app/Contents/Resources/app/extensions/json-language-features/README.md) – 🚧 Draft – 2025-01-01
-- [vscode-extension/.vscode-test/vscode-darwin-arm64-1.101.2/Visual Studio Code.app/Contents/Resources/app/extensions/references-view/README.md](vscode-extension/.vscode-test/vscode-darwin-arm64-1.101.2/Visual Studio Code.app/Contents/Resources/app/extensions/references-view/README.md) – 🚧 Draft – 2025-01-01
-- [vscode-extension/.vscode-test/vscode-darwin-arm64-1.101.2/Visual Studio Code.app/Contents/Resources/app/extensions/gulp/README.md](vscode-extension/.vscode-test/vscode-darwin-arm64-1.101.2/Visual Studio Code.app/Contents/Resources/app/extensions/gulp/README.md) – 🚧 Draft – 2025-01-01
-- [vscode-extension/.vscode-test/vscode-darwin-arm64-1.101.2/Visual Studio Code.app/Contents/Resources/app/extensions/css-language-features/README.md](vscode-extension/.vscode-test/vscode-darwin-arm64-1.101.2/Visual Studio Code.app/Contents/Resources/app/extensions/css-language-features/README.md) – 🚧 Draft – 2025-01-01
-- [vscode-extension/.vscode-test/vscode-darwin-arm64-1.101.2/Visual Studio Code.app/Contents/Resources/app/extensions/typescript-language-features/README.md](vscode-extension/.vscode-test/vscode-darwin-arm64-1.101.2/Visual Studio Code.app/Contents/Resources/app/extensions/typescript-language-features/README.md) – 🚧 Draft – 2025-01-01
-- [vscode-extension/.vscode-test/vscode-darwin-arm64-1.101.2/Visual Studio Code.app/Contents/Resources/app/extensions/grunt/README.md](vscode-extension/.vscode-test/vscode-darwin-arm64-1.101.2/Visual Studio Code.app/Contents/Resources/app/extensions/grunt/README.md) – 🚧 Draft – 2025-01-01
-- [vscode-extension/.vscode-test/vscode-darwin-arm64-1.101.2/Visual Studio Code.app/Contents/Resources/app/extensions/microsoft-authentication/README.md](vscode-extension/.vscode-test/vscode-darwin-arm64-1.101.2/Visual Studio Code.app/Contents/Resources/app/extensions/microsoft-authentication/README.md) – 🚧 Draft – 2025-01-01
-- [vscode-extension/.vscode-test/vscode-darwin-arm64-1.101.2/Visual Studio Code.app/Contents/Resources/app/extensions/jake/README.md](vscode-extension/.vscode-test/vscode-darwin-arm64-1.101.2/Visual Studio Code.app/Contents/Resources/app/extensions/jake/README.md) – 🚧 Draft – 2025-01-01
-- [vscode-extension/.vscode-test/vscode-darwin-arm64-1.101.2/Visual Studio Code.app/Contents/Resources/app/extensions/ipynb/README.md](vscode-extension/.vscode-test/vscode-darwin-arm64-1.101.2/Visual Studio Code.app/Contents/Resources/app/extensions/ipynb/README.md) – 🚧 Draft – 2025-01-01
-- [vscode-extension/.vscode-test/vscode-darwin-arm64-1.101.2/Visual Studio Code.app/Contents/Resources/app/extensions/notebook-renderers/README.md](vscode-extension/.vscode-test/vscode-darwin-arm64-1.101.2/Visual Studio Code.app/Contents/Resources/app/extensions/notebook-renderers/README.md) – 🚧 Draft – 2025-01-01
-- [vscode-extension/.vscode-test/vscode-darwin-arm64-1.101.2/Visual Studio Code.app/Contents/Resources/app/extensions/ms-vscode.js-debug/readme.md](vscode-extension/.vscode-test/vscode-darwin-arm64-1.101.2/Visual Studio Code.app/Contents/Resources/app/extensions/ms-vscode.js-debug/readme.md) – 🚧 Draft – 2025-01-01
-- [vscode-extension/.vscode-test/vscode-darwin-arm64-1.101.2/Visual Studio Code.app/Contents/Resources/app/extensions/emmet/README.md](vscode-extension/.vscode-test/vscode-darwin-arm64-1.101.2/Visual Studio Code.app/Contents/Resources/app/extensions/emmet/README.md) – 🚧 Draft – 2025-01-01
-- [vscode-extension/.vscode-test/vscode-darwin-arm64-1.101.2/Visual Studio Code.app/Contents/Resources/app/extensions/github/README.md](vscode-extension/.vscode-test/vscode-darwin-arm64-1.101.2/Visual Studio Code.app/Contents/Resources/app/extensions/github/README.md) – 🚧 Draft – 2025-01-01
-- [vscode-extension/.vscode-test/vscode-darwin-arm64-1.101.2/Visual Studio Code.app/Contents/Resources/app/extensions/github/testWorkspace/some-markdown.md](vscode-extension/.vscode-test/vscode-darwin-arm64-1.101.2/Visual Studio Code.app/Contents/Resources/app/extensions/github/testWorkspace/some-markdown.md) – 🚧 Draft – 2025-01-01
-- [vscode-extension/.vscode-test/vscode-darwin-arm64-1.101.2/Visual Studio Code.app/Contents/Resources/app/extensions/github/testWorkspace/PULL_REQUEST_TEMPLATE.md](vscode-extension/.vscode-test/vscode-darwin-arm64-1.101.2/Visual Studio Code.app/Contents/Resources/app/extensions/github/testWorkspace/PULL_REQUEST_TEMPLATE.md) – 🚧 Draft – 2025-01-01
-- [vscode-extension/.vscode-test/vscode-darwin-arm64-1.101.2/Visual Studio Code.app/Contents/Resources/app/extensions/github/testWorkspace/docs/PULL_REQUEST_TEMPLATE.md](vscode-extension/.vscode-test/vscode-darwin-arm64-1.101.2/Visual Studio Code.app/Contents/Resources/app/extensions/github/testWorkspace/docs/PULL_REQUEST_TEMPLATE.md) – 🚧 Draft – 2025-01-01
-- [vscode-extension/.vscode-test/vscode-darwin-arm64-1.101.2/Visual Studio Code.app/Contents/Resources/app/extensions/github/testWorkspace/docs/PULL_REQUEST_TEMPLATE/b.md](vscode-extension/.vscode-test/vscode-darwin-arm64-1.101.2/Visual Studio Code.app/Contents/Resources/app/extensions/github/testWorkspace/docs/PULL_REQUEST_TEMPLATE/b.md) – 🚧 Draft – 2025-01-01
-- [vscode-extension/.vscode-test/vscode-darwin-arm64-1.101.2/Visual Studio Code.app/Contents/Resources/app/extensions/github/testWorkspace/docs/PULL_REQUEST_TEMPLATE/a.md](vscode-extension/.vscode-test/vscode-darwin-arm64-1.101.2/Visual Studio Code.app/Contents/Resources/app/extensions/github/testWorkspace/docs/PULL_REQUEST_TEMPLATE/a.md) – 🚧 Draft – 2025-01-01
-- [vscode-extension/.vscode-test/vscode-darwin-arm64-1.101.2/Visual Studio Code.app/Contents/Resources/app/extensions/github/testWorkspace/PULL_REQUEST_TEMPLATE/b.md](vscode-extension/.vscode-test/vscode-darwin-arm64-1.101.2/Visual Studio Code.app/Contents/Resources/app/extensions/github/testWorkspace/PULL_REQUEST_TEMPLATE/b.md) – 🚧 Draft – 2025-01-01
-- [vscode-extension/.vscode-test/vscode-darwin-arm64-1.101.2/Visual Studio Code.app/Contents/Resources/app/extensions/github/testWorkspace/PULL_REQUEST_TEMPLATE/a.md](vscode-extension/.vscode-test/vscode-darwin-arm64-1.101.2/Visual Studio Code.app/Contents/Resources/app/extensions/github/testWorkspace/PULL_REQUEST_TEMPLATE/a.md) – 🚧 Draft – 2025-01-01
-- [vscode-extension/.vscode-test/vscode-darwin-arm64-1.101.2/Visual Studio Code.app/Contents/Resources/app/extensions/markdown-language-features/README.md](vscode-extension/.vscode-test/vscode-darwin-arm64-1.101.2/Visual Studio Code.app/Contents/Resources/app/extensions/markdown-language-features/README.md) – 🚧 Draft – 2025-01-01
-- [vscode-extension/.vscode-test/vscode-darwin-arm64-1.101.2/Visual Studio Code.app/Contents/Resources/app/extensions/git-base/README.md](vscode-extension/.vscode-test/vscode-darwin-arm64-1.101.2/Visual Studio Code.app/Contents/Resources/app/extensions/git-base/README.md) – 🚧 Draft – 2025-01-01
-- [vscode-extension/.vscode-test/vscode-darwin-arm64-1.101.2/Visual Studio Code.app/Contents/Resources/app/extensions/markdown-math/README.md](vscode-extension/.vscode-test/vscode-darwin-arm64-1.101.2/Visual Studio Code.app/Contents/Resources/app/extensions/markdown-math/README.md) – 🚧 Draft – 2025-01-01
-- [vscode-extension/.vscode-test/vscode-darwin-arm64-1.101.2/Visual Studio Code.app/Contents/Resources/app/extensions/github-authentication/README.md](vscode-extension/.vscode-test/vscode-darwin-arm64-1.101.2/Visual Studio Code.app/Contents/Resources/app/extensions/github-authentication/README.md) – 🚧 Draft – 2025-01-01
-- [vscode-extension/.vscode-test/vscode-darwin-arm64-1.101.2/Visual Studio Code.app/Contents/Resources/app/extensions/ms-vscode.vscode-js-profile-table/README.md](vscode-extension/.vscode-test/vscode-darwin-arm64-1.101.2/Visual Studio Code.app/Contents/Resources/app/extensions/ms-vscode.vscode-js-profile-table/README.md) – 🚧 Draft – 2025-01-01
-- [vscode-extension/.vscode-test/vscode-darwin-arm64-1.101.2/Visual Studio Code.app/Contents/Resources/app/extensions/php-language-features/README.md](vscode-extension/.vscode-test/vscode-darwin-arm64-1.101.2/Visual Studio Code.app/Contents/Resources/app/extensions/php-language-features/README.md) – 🚧 Draft – 2025-01-01
-- [vscode-extension/.vscode-test/vscode-darwin-arm64-1.101.2/Visual Studio Code.app/Contents/Resources/app/extensions/npm/README.md](vscode-extension/.vscode-test/vscode-darwin-arm64-1.101.2/Visual Studio Code.app/Contents/Resources/app/extensions/npm/README.md) – 🚧 Draft – 2025-01-01
-- [vscode-extension/.vscode-test/vscode-darwin-arm64-1.101.2/Visual Studio Code.app/Contents/Resources/app/extensions/git/README.md](vscode-extension/.vscode-test/vscode-darwin-arm64-1.101.2/Visual Studio Code.app/Contents/Resources/app/extensions/git/README.md) – 🚧 Draft – 2025-01-01
-- [vscode-extension/.vscode-test/vscode-darwin-arm64-1.101.2/Visual Studio Code.app/Contents/Resources/app/extensions/search-result/README.md](vscode-extension/.vscode-test/vscode-darwin-arm64-1.101.2/Visual Studio Code.app/Contents/Resources/app/extensions/search-result/README.md) – 🚧 Draft – 2025-01-01
-- [vscode-extension/src/test/fixtures/missing-metadata.md](vscode-extension/src/test/fixtures/missing-metadata.md) – 🚧 Draft – 2025-01-01
+- [docman/examples/samplerepo/tools/README.md](docman/examples/samplerepo/tools/README.md) – ✅ Production Ready – 2025-06-12
+- [docman/examples/samplerepo/tools/documentation_maintenance/README.md](docman/examples/samplerepo/tools/documentation_maintenance/README.md) – ✅ Production Ready – 2025-06-10
+
+
+## Vscode Extension
+- [vscode-extension/CHANGELOG.md](vscode-extension/CHANGELOG.md) – ✅ Production Ready – 2025-07-05
+- [vscode-extension/README.md](vscode-extension/README.md) – ✅ Production Ready – 2025-07-05
 - [vscode-extension/src/test/fixtures/README.md](vscode-extension/src/test/fixtures/README.md) – ✅ Production Ready – 2025-07-02
-- [vscode-extension/src/test/fixtures/valid-readme.md](vscode-extension/src/test/fixtures/valid-readme.md) – ✅ Production Ready – 2025-07-02
-- [vscode-extension/src/test/fixtures/DOCUMENTATION_INDEX.md](vscode-extension/src/test/fixtures/DOCUMENTATION_INDEX.md) – 🚧 Draft – 2025-01-01
 - [vscode-extension/src/test/fixtures/invalid-readme.md](vscode-extension/src/test/fixtures/invalid-readme.md) – Invalid Status – invalid-date
-- [vscode-extension/README-old.md](vscode-extension/README-old.md) – 🚧 Draft – 2025-01-01
-- [vscode-extension/DOCUMENTATION_INDEX.md](vscode-extension/DOCUMENTATION_INDEX.md) – 🚧 Draft – 2025-01-01
+- [vscode-extension/src/test/fixtures/missing-metadata.md](vscode-extension/src/test/fixtures/missing-metadata.md) – 🚧 Draft – 2025-01-01
+- [vscode-extension/src/test/fixtures/valid-readme.md](vscode-extension/src/test/fixtures/valid-readme.md) – ✅ Production Ready – 2025-07-02
 

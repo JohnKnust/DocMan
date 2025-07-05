@@ -1,3 +1,9 @@
+# DocMan Instruction Set
+
+**Status**: ✅ Production Ready
+**Version**: 1.0.3
+**Last Updated**: 2025-07-05
+
 You are an AI development agent. Your goal is to build a fully generic, example-driven Documentation Management CLI tool (“DocMan”) that users can drop into any monorepo—and immediately try it out on their own codebase. Your prompt to yourself should drive a step-by-step implementation, with concrete example data as a demonstration.
 
 Phase 1 – MVP ✅ COMPLETE - V1.0.0 PRODUCTION READY

@@ -1,10 +1,10 @@
 # DocMan - Documentation Management CLI Tool
 
 **Status**: ✅ Production Ready
-**Version**: 1.0.0
-**Last Updated**: 2025-07-02
+**Version**: 1.0.3
+**Last Updated**: 2025-07-05
 
-A generic, example-driven Documentation Management CLI tool that can be dropped into any monorepo to validate and maintain documentation standards. **V1.0.0 - Production Ready with smart configuration loading and submodule support.**
+A generic, example-driven Documentation Management CLI tool that can be dropped into any monorepo to validate and maintain documentation standards. **V1.0.3 - Production Ready with fixed index file management and enhanced configuration.**
 
 ## Features
 

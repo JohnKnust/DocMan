@@ -92,7 +92,8 @@ export class DocManProvider {
         const pythonPath = config.get<string>('pythonPath', 'python');
         const cliPath = await this.getCliPath();
 
-        await this.runDocManCommand(pythonPath, cliPath, [workspacePath, '--fix']);
+        // Only update index, don't create README files (use Quick Fixes for that)
+        await this.runDocManCommand(pythonPath, cliPath, [workspacePath, '--verbose']);
     }
 
     private async getCliPath(): Promise<string> {

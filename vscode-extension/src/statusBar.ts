@@ -8,7 +8,7 @@ export class StatusBarManager {
             vscode.StatusBarAlignment.Left,
             100
         );
-        this.statusBarItem.command = 'docman.showConfigStatus';
+        this.statusBarItem.command = 'docman.toggleActivation';
         this.statusBarItem.show();
         this.updateStatus('Initializing...');
     }
@@ -23,7 +23,7 @@ export class StatusBarManager {
         }
 
         this.statusBarItem.text = `$(book) DocMan: ${status}`;
-        this.statusBarItem.tooltip = `DocMan Status: ${status}\nClick for configuration details`;
+        this.statusBarItem.tooltip = `DocMan Status: ${status}\nClick to toggle activation`;
         this.statusBarItem.show();
     }
 

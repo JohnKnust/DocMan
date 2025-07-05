@@ -11,12 +11,14 @@ from pathlib import Path
 # Default ignore patterns for directory traversal
 DEFAULT_IGNORE_PATTERNS = {
     '.git',
-    'node_modules', 
+    'node_modules',
     'venv',
     '__pycache__',
     'core',
     '.pytest_cache',
     '.mypy_cache',
+    '.vscode-test',
+    'vscode-extension',
     'dist',
     'build'
 }

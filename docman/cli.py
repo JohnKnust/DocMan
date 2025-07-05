@@ -9,10 +9,11 @@ Usage:
     python cli.py [OPTIONS] [REPO_PATH]
 
 Options:
-    --verbose, -v    Enable verbose output
-    --fix           Automatically fix issues where possible
-    --report        Generate detailed report
-    --help, -h      Show this help message
+    --verbose, -v       Enable verbose output
+    --fix              Batch auto-fix: create missing README files with confirmation
+    --report           Generate detailed report
+    --create-config    Create standardized .docmanrc.template with defaults
+    --help, -h         Show this help message
 
 Examples:
     python cli.py                    # Check current directory
@@ -36,6 +37,7 @@ from src.reporter import Reporter, ValidationResult
 from src.validators.readme_validator import ReadmeValidator
 from src.validators.metadata_validator import MetadataValidator
 from src.validators.link_validator import LinkValidator
+from src.autofix import AutoFixer
 
 
 def parse_arguments() -> argparse.Namespace:
@@ -61,8 +63,8 @@ def parse_arguments() -> argparse.Namespace:
     
     parser.add_argument(
         "--fix",
-        action="store_true", 
-        help="Automatically fix issues where possible"
+        action="store_true",
+        help="Batch auto-fix: create missing README files with user confirmation"
     )
     
     parser.add_argument(
@@ -74,7 +76,7 @@ def parse_arguments() -> argparse.Namespace:
     parser.add_argument(
         "--create-config",
         action="store_true",
-        help="Create a configuration template file"
+        help="Create a standardized .docmanrc.template file with default settings"
     )
 
     parser.add_argument(
@@ -93,9 +95,16 @@ def main() -> int:
     # Handle config template creation
     if args.create_config:
         template_path = create_config_template()
-        print(f"✅ Created configuration template: {template_path}")
-        print("📝 Edit this file and copy to .docmanrc in your project root")
+        print(f"✅ Created standardized configuration template: {template_path}")
+        print("📝 This template contains DocMan's recommended default settings")
+        print("💡 Copy to .docmanrc in your project root and customize as needed")
         return 0
+
+    # Initialize auto-fixer if needed
+    auto_fixer = None
+    if args.fix:
+        # We'll initialize this after loading config
+        pass
 
     # Load configuration with optional override
     if args.config:
@@ -105,7 +114,11 @@ def main() -> int:
     # Initialize components
     repo_path = Path(args.repo_path).resolve()
     reporter = Reporter(verbose=args.verbose or config.verbose_output)
-    indexer = DocumentationIndexer(repo_path)
+    indexer = DocumentationIndexer(repo_path, config.ignore_patterns)
+
+    # Initialize auto-fixer if --fix option is used
+    if args.fix:
+        auto_fixer = AutoFixer(repo_path, config)
 
     if args.verbose or config.verbose_output:
         print(f"🔍 Analyzing repository: {repo_path}")
@@ -141,6 +154,18 @@ def main() -> int:
         print(f"Found {len(readme_violations)} missing READMEs:")
         for violation in readme_violations:
             print(f"  {violation}")
+
+    # Apply auto-fixes if requested
+    if args.fix and auto_fixer and readme_violations:
+        print("\n🔧 Auto-fix: Creating missing README files...")
+        missing_dirs = auto_fixer.get_missing_readme_directories(readme_violations)
+        created_count = auto_fixer.fix_missing_readmes(missing_dirs, interactive=True)
+
+        if created_count > 0:
+            # Re-run README validation to update results
+            readme_violations = readme_validator.validate()
+            results.missing_readmes = readme_violations
+            print(f"📊 Updated validation: {len(readme_violations)} missing READMEs remaining")
 
     # Step 3: Metadata Format Enforcement
     if verbose:

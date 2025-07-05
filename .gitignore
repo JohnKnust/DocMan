@@ -261,6 +261,7 @@ Thumbs.db
 # Test files
 test-results/
 test-output/
+.docmanrc.template
 
 # Documentation build
 docs/build/

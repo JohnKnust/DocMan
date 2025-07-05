@@ -1,10 +1,20 @@
 # DocMan - Documentation Management System
 
 **Status**: ✅ Production Ready
-**Version**: 1.0.2
-**Last Updated**: 2025-07-04
+**Version**: 1.0.3
+**Last Updated**: 2025-07-05
 
 A comprehensive, example-driven Documentation Management System that users can drop into any monorepo - with immediate validation and automation for high-quality documentation.
+
+## 📋 Component Versions
+
+| Component | Version | Status | Description |
+|-----------|---------|--------|-------------|
+| **DocMan Project** | **v1.0.3** | ✅ Production Ready | Main project coordination and documentation |
+| **DocMan CLI** | **v1.0.3** | ✅ Production Ready | Core validation engine (`docman/`) |
+| **VS Code Extension** | **v1.2.6** | ✅ Production Ready | Real-time validation UI (`vscode-extension/`) |
+
+> **🏷️ Git Tagging Strategy**: Git tags follow the main DocMan project version (currently `v1.0.2`). Individual components may have different versions for independent releases.
 
 ## 🎯 Project Overview
 
@@ -178,7 +188,7 @@ code . && F5
 ```bash
 python cli.py                    # Check current directory
 python cli.py --verbose          # With detailed output
-python cli.py --create-config    # Create configuration template
+python cli.py --create-config    # Create standardized .docmanrc.template
 python cli.py /path/to/repo      # Check specific repository
 make run                         # Via Makefile
 make test                        # Run tests
@@ -210,11 +220,11 @@ your-project/
 
 **🚀 Quick Setup:**
 ```bash
-# Create and customize configuration
+# Create standardized configuration template
 cd DocMan/docman
 python cli.py --create-config
 cp ../.docmanrc.template ../../.docmanrc
-nano ../../.docmanrc
+nano ../../.docmanrc  # Customize for your project
 
 # Run validation
 python cli.py --verbose
@@ -238,6 +248,29 @@ python cli.py --verbose
   "docman.validationDelay": 500
 }
 ```
+
+## 🏷️ Versioning & Git Tags
+
+### Versioning Strategy
+- **Main Project Version**: Coordinates overall DocMan releases and major milestones
+- **Component Versions**: Individual components (CLI, Extension) can have independent versions
+- **Git Tags**: Follow main project version for repository-wide releases
+
+### Recommended Git Tagging
+```bash
+# Tag main project releases
+git tag -a v1.0.3 -m "DocMan v1.0.3: Fixed index management + VS Code Extension v1.2.6"
+git push origin v1.0.3
+
+# For component-specific releases (optional)
+git tag -a cli-v1.0.1 -m "DocMan CLI v1.0.1: Bug fixes"
+git tag -a extension-v1.2.7 -m "VS Code Extension v1.2.7: New features"
+```
+
+### Current Release Status
+- **Latest Git Tag**: `v1.0.3` (recommended to create)
+- **Includes**: DocMan CLI v1.0.3 + VS Code Extension v1.2.6
+- **Status**: Production ready for all components
 
 ## 🧪 Testing
 

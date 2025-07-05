@@ -41,7 +41,8 @@ export class CodeActionProvider implements vscode.CodeActionProvider {
 
         switch (diagnostic.code) {
             case 'missing_readme':
-                actions.push(this.createReadmeAction(document));
+                const readmeAction = await this.createDynamicReadmeAction(document);
+                actions.push(readmeAction);
                 break;
             case 'metadata_violation':
                 // Create dynamic metadata action based on configuration
@@ -71,6 +72,57 @@ export class CodeActionProvider implements vscode.CodeActionProvider {
 **Version**: 0.1.0  
 **Last Updated**: ${new Date().toISOString().split('T')[0]}
 
+## Description
+
+Add your description here.
+
+## Usage
+
+Add usage instructions here.
+`;
+
+        action.edit = new vscode.WorkspaceEdit();
+        const readmeUri = vscode.Uri.file(document.uri.fsPath.replace(/[^/\\]*$/, 'README.md'));
+        action.edit.createFile(readmeUri, { ignoreIfExists: true });
+        action.edit.insert(readmeUri, new vscode.Position(0, 0), readmeTemplate);
+
+        action.diagnostics = []; // Will fix the diagnostic
+        return action;
+    }
+
+    private async createDynamicReadmeAction(document: vscode.TextDocument): Promise<vscode.CodeAction> {
+        // Import ConfigManager dynamically to avoid circular dependencies
+        const { ConfigManager } = await import('./configManager');
+        const configManager = new ConfigManager();
+        const config = await configManager.getDocManConfig();
+
+        const action = new vscode.CodeAction(
+            'Create README.md with dynamic DocMan metadata',
+            vscode.CodeActionKind.QuickFix
+        );
+
+        const requiredFields = config.required_metadata || ['Status', 'Version', 'Last Updated'];
+        const validStatuses = config.valid_statuses || ['🚧 Draft'];
+        const defaultStatus = validStatuses[0] || '🚧 Draft';
+
+        // Build dynamic metadata section
+        let metadataSection = '';
+        for (const field of requiredFields) {
+            if (field === 'Status') {
+                metadataSection += `**${field}**: ${defaultStatus}  \n`;
+            } else if (field === 'Version') {
+                metadataSection += `**${field}**: 0.1.0  \n`;
+            } else if (field === 'Last Updated') {
+                metadataSection += `**${field}**: ${new Date().toISOString().split('T')[0]}  \n`;
+            } else {
+                // For custom fields, leave empty for user to fill
+                metadataSection += `**${field}**:   \n`;
+            }
+        }
+
+        const readmeTemplate = `# ${this.getDirectoryName(document.uri.fsPath)}
+
+${metadataSection}
 ## Description
 
 Add your description here.

@@ -16,8 +16,9 @@ let configManager: ConfigManager;
 let hoverProvider: HoverProvider;
 let codeActionProvider: CodeActionProvider;
 let fileWatcher: FileWatcher;
+let isDocManEnabled = false;
 
-export function activate(context: vscode.ExtensionContext) {
+export async function activate(context: vscode.ExtensionContext) {
     console.log('DocMan extension is now active!');
 
     // Initialize managers
@@ -30,20 +31,26 @@ export function activate(context: vscode.ExtensionContext) {
     codeActionProvider = new CodeActionProvider(docmanProvider);
     fileWatcher = new FileWatcher(docmanProvider, diagnosticsManager, decorationsManager);
 
-    // Register commands
-    registerCommands(context);
+    // Check if DocMan should be enabled for this workspace
+    const isEnabled = await checkAndPromptForActivation(context, configManager, statusBarManager);
 
-    // Register providers
-    registerProviders(context);
+    // Always register commands (including enable/disable)
+    registerCommands(context, isEnabled);
 
-    // Initialize file watcher
-    fileWatcher.initialize(context);
+    if (isEnabled) {
+        // Register providers only if enabled
+        registerProviders(context);
 
-    // Update status bar
-    statusBarManager.updateStatus('Ready');
+        // Initialize file watcher
+        fileWatcher.initialize(context);
+
+        statusBarManager.updateStatus('Ready');
+    } else {
+        statusBarManager.updateStatus('Disabled (click to enable)');
+    }
 }
 
-function registerCommands(context: vscode.ExtensionContext) {
+function registerCommands(context: vscode.ExtensionContext, isEnabled: boolean) {
     // Validate Current File
     const validateCurrentFileCommand = vscode.commands.registerCommand('docman.validateCurrentFile', async () => {
         const editor = vscode.window.activeTextEditor;
@@ -115,56 +122,6 @@ function registerCommands(context: vscode.ExtensionContext) {
         }
     });
 
-    // Validate Metadata Only
-    const validateMetadataOnlyCommand = vscode.commands.registerCommand('docman.validateMetadataOnly', async () => {
-        if (!vscode.workspace.workspaceFolders) {
-            vscode.window.showWarningMessage('No workspace folder found');
-            return;
-        }
-
-        statusBarManager.updateStatus('Validating metadata...');
-        try {
-            // Clear all existing diagnostics first
-            diagnosticsManager.clearDiagnostics();
-
-            const workspaceRoot = vscode.workspace.workspaceFolders[0].uri.fsPath;
-            const result = await docmanProvider.validateWorkspace(workspaceRoot);
-
-            // Filter only metadata-related issues
-            const metadataResult = {
-                ...result,
-                files: Object.fromEntries(
-                    Object.entries(result.files).map(([path, fileResult]) => [
-                        path,
-                        {
-                            ...fileResult,
-                            issues: fileResult.issues.filter(issue =>
-                                issue.type === 'metadata_violation' || issue.type === 'missing_readme'
-                            )
-                        }
-                    ])
-                )
-            };
-
-            // Update diagnostics for metadata issues only
-            await diagnosticsManager.updateWorkspaceDiagnostics(metadataResult);
-
-            const metadataIssues = Object.values(metadataResult.files)
-                .reduce((count, file) => count + file.issues.length, 0);
-
-            if (metadataIssues === 0) {
-                vscode.window.showInformationMessage('✅ No metadata issues found in workspace');
-                statusBarManager.updateStatus('✅ Metadata valid');
-            } else {
-                vscode.window.showWarningMessage(`⚠️ Found ${metadataIssues} metadata issue(s)`);
-                statusBarManager.updateStatus(`⚠️ ${metadataIssues} metadata issues`);
-            }
-        } catch (error) {
-            vscode.window.showErrorMessage(`DocMan metadata validation failed: ${error}`);
-            statusBarManager.updateStatus('❌ Metadata error');
-        }
-    });
-
     // Update Index
     const updateIndexCommand = vscode.commands.registerCommand('docman.updateIndex', async () => {
         if (!vscode.workspace.workspaceFolders) {
@@ -223,15 +180,20 @@ function registerCommands(context: vscode.ExtensionContext) {
         vscode.window.showInformationMessage(status);
     });
 
+    // Toggle DocMan Activation
+    const toggleActivationCommand = vscode.commands.registerCommand('docman.toggleActivation', async () => {
+        await toggleDocManActivation(context);
+    });
+
     // Register all commands
     context.subscriptions.push(
         validateCurrentFileCommand,
         validateWorkspaceCommand,
-        validateMetadataOnlyCommand,
         updateIndexCommand,
         toggleAutoValidationCommand,
         openConfigCommand,
-        showConfigStatusCommand
+        showConfigStatusCommand,
+        toggleActivationCommand
     );
 }
 
@@ -256,7 +218,7 @@ function registerProviders(context: vscode.ExtensionContext) {
 
 export function deactivate() {
     console.log('DocMan extension is now deactivated');
-    
+
     // Clean up resources
     if (diagnosticsManager) {
         diagnosticsManager.dispose();
@@ -269,5 +231,119 @@ export function deactivate() {
     }
     if (fileWatcher) {
         fileWatcher.dispose();
+    }
+}
+
+async function checkAndPromptForActivation(
+    context: vscode.ExtensionContext,
+    configManager: ConfigManager,
+    statusBarManager: StatusBarManager
+): Promise<boolean> {
+    if (!vscode.workspace.workspaceFolders) {
+        return false;
+    }
+
+    const workspaceUri = vscode.workspace.workspaceFolders[0].uri;
+    const workspaceState = context.workspaceState;
+
+    // Check if user has already made a decision for this workspace
+    const userDecision = workspaceState.get<string>(`docman.enabled.${workspaceUri.fsPath}`);
+    if (userDecision === 'enabled') {
+        isDocManEnabled = true;
+        return true;
+    } else if (userDecision === 'disabled') {
+        isDocManEnabled = false;
+        return false;
+    }
+
+    // Check if .docmanrc exists in workspace or parent directories
+    const configPath = await configManager.findConfigFile();
+    if (!configPath) {
+        // No config found, offer to create one
+        const choice = await vscode.window.showInformationMessage(
+            'DocMan extension is installed but no configuration found. Would you like to create a .docmanrc configuration?',
+            { modal: false },
+            'Create Config',
+            'Not now',
+            'Never for this workspace'
+        );
+
+        switch (choice) {
+            case 'Create Config':
+                try {
+                    await configManager.createConfigFile();
+                    await workspaceState.update(`docman.enabled.${workspaceUri.fsPath}`, 'enabled');
+                    isDocManEnabled = true;
+                    vscode.window.showInformationMessage('✅ DocMan configuration created and enabled!');
+                    return true;
+                } catch (error) {
+                    vscode.window.showErrorMessage(`Failed to create configuration: ${error}`);
+                    isDocManEnabled = false;
+                    return false;
+                }
+            case 'Never for this workspace':
+                await workspaceState.update(`docman.enabled.${workspaceUri.fsPath}`, 'disabled');
+                isDocManEnabled = false;
+                return false;
+            default: // 'Not now' or dismissed
+                isDocManEnabled = false;
+                return false;
+        }
+    }
+
+    // Config found, prompt user to enable
+    const choice = await vscode.window.showInformationMessage(
+        'DocMan configuration detected. Enable documentation validation for this workspace?',
+        { modal: false },
+        'Enable',
+        'Not now',
+        'Never for this workspace'
+    );
+
+    switch (choice) {
+        case 'Enable':
+            await workspaceState.update(`docman.enabled.${workspaceUri.fsPath}`, 'enabled');
+            isDocManEnabled = true;
+            return true;
+        case 'Never for this workspace':
+            await workspaceState.update(`docman.enabled.${workspaceUri.fsPath}`, 'disabled');
+            isDocManEnabled = false;
+            return false;
+        default: // 'Not now' or dismissed
+            isDocManEnabled = false;
+            return false;
+    }
+}
+
+async function toggleDocManActivation(context: vscode.ExtensionContext): Promise<void> {
+    if (!vscode.workspace.workspaceFolders) {
+        vscode.window.showWarningMessage('No workspace folder found');
+        return;
+    }
+
+    const workspaceUri = vscode.workspace.workspaceFolders[0].uri;
+    const workspaceState = context.workspaceState;
+
+    isDocManEnabled = !isDocManEnabled;
+
+    if (isDocManEnabled) {
+        await workspaceState.update(`docman.enabled.${workspaceUri.fsPath}`, 'enabled');
+
+        // Re-register providers
+        registerProviders(context);
+        fileWatcher.initialize(context);
+
+        statusBarManager.updateStatus('Ready');
+        vscode.window.showInformationMessage('✅ DocMan enabled for this workspace');
+    } else {
+        await workspaceState.update(`docman.enabled.${workspaceUri.fsPath}`, 'disabled');
+
+        // Clear diagnostics and decorations
+        diagnosticsManager.clearDiagnostics();
+        decorationsManager.dispose();
+        fileWatcher.dispose();
+
+        statusBarManager.updateStatus('Disabled (click to enable)');
+        vscode.window.showInformationMessage('❌ DocMan disabled for this workspace');
     }
 }
