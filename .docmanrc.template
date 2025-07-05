@@ -21,9 +21,28 @@ strict_validation = true
 # Required metadata fields in README files
 required_metadata = [
     "Status",
-    "Version", 
+    "Version",
     "Last Updated"
 ]
+
+# Valid status values (customize these for your project)
+valid_statuses = [
+    "✅ Production Ready",
+    "🚧 Draft",
+    "🚫 Deprecated",
+    "⚠️ Experimental",
+    "🔄 In Progress"
+]
+
+# Version format validation (currently hardcoded to semantic versioning)
+# Supported: "semantic" (x.y.z format)
+# Note: Only semantic versioning is currently implemented
+version_pattern = "semantic"
+
+# Date format validation (currently hardcoded to ISO format)
+# Supported: "YYYY-MM-DD" (ISO 8601 Standard, international eindeutig)
+# Note: Only YYYY-MM-DD format is currently implemented
+date_format = "YYYY-MM-DD"
 
 # Ignore patterns - directories and files to skip during scanning
 ignore_patterns = [

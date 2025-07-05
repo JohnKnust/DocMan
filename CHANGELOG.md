@@ -5,11 +5,39 @@ All notable changes to DocMan will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.2] - 2025-07-04
+
+### 🐛 Fixed - Critical Config Parsing Bug
+- **Python CLI Config Parser**: Fixed critical bug where `valid_statuses`, `version_pattern`, and `date_format` were ignored from `.docmanrc` files
+  - The parser was reading config files correctly but not applying values due to missing keys in `key_mapping` dictionary
+  - Now properly supports dynamic configuration for all metadata validation rules
+  - Both Python CLI and VS Code extension now correctly read and apply custom status values from `.docmanrc`
+
+### ✨ Added
+- Public `config_path` and `is_fallback` properties to `DocManConfig` class for better config introspection
+- Enhanced config debugging capabilities
+
+### 🔧 Technical Details
+- Added missing `'valid_statuses'`, `'version_pattern'`, and `'date_format'` keys to `_set_config_value()` method
+- Enhanced `DocManConfig` dataclass with proper property accessors for private attributes
+
+## [1.0.1] - 2025-07-02
+
+### 🔧 Changed
+- **Metadata validation scope**: Now validates ALL markdown files, not just README files
+- **Comprehensive coverage**: Every .md file in repository must have proper metadata (Status, Version, Last Updated)
+
+### 🐛 Fixed
+- **Validation gap**: Previously only files with "readme" in name were validated
+- **Consistency**: All markdown files now follow same metadata requirements
+
 ## [1.0.0] - 2025-07-02
 
 ### 🎉 Initial Production Release
 
 DocMan V1.0.0 is now production ready! This release provides a complete, robust documentation management system that can be dropped into any monorepo.
+
+**Includes VS Code Extension v1.2.1** - Real-time validation with inline errors and auto-fixes.
 
 ### ✅ Added
 
@@ -46,6 +74,7 @@ DocMan V1.0.0 is now production ready! This release provides a complete, robust 
 - **📚 Complete Documentation**: Detailed README files and usage examples
 - **🛠️ Development Tools**: Makefile with common development tasks
 - **🎨 Code Quality**: Linting, formatting, and type checking
+- **🔌 VS Code Extension**: Real-time validation with Problems Panel integration (v1.2.1)
 
 #### Submodule Integration
 - **📁 Clean Structure**: Template in DocMan directory, config in parent
@@ -94,10 +123,10 @@ This V1.0.0 release is stable and ready for production use in:
 ## [Unreleased]
 
 ### Planned Features
-- VS Code Extension (Phase 2)
 - Web UI Dashboard (Phase 3)
 - MkDocs Integration (Phase 4)
 - Advanced Reporting Features
+- VS Code Extension enhancements
 
 ---
 

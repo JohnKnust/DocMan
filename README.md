@@ -1,8 +1,8 @@
 # DocMan - Documentation Management System
 
 **Status**: ✅ Production Ready
-**Version**: 1.0.0
-**Last Updated**: 2025-07-02
+**Version**: 1.0.2
+**Last Updated**: 2025-07-04
 
 A comprehensive, example-driven Documentation Management System that users can drop into any monorepo - with immediate validation and automation for high-quality documentation.
 
@@ -18,7 +18,7 @@ DocMan is a generic Documentation Management CLI tool with VS Code integration, 
 **CLI Tool under `docman/` - Production Ready**
 
 - **📋 README Presence Validation**: Recursive checking of all directories for README.md files
-- **📝 Metadata Format Enforcement**: Validation of Status, Version, and Last Updated fields
+- **📝 Metadata Format Enforcement**: Validation of Status, Version, and Last Updated fields in ALL markdown files
 - **🔗 Link & Date Integrity**: Verification of Markdown links and date consistency
 - **📚 Index Management**: Automatic management of DOCUMENTATION_INDEX.md
 - **⚙️ Flexible Configuration System**: Smart .docmanrc loading with submodule support and fallback
@@ -155,7 +155,7 @@ code . && F5
 
 ### CLI Tool Features (V1.0.0)
 - **📋 Automatic README Validation** in all directories
-- **📝 Metadata Format Enforcement** with configurable rules
+- **📝 Metadata Format Enforcement** with configurable rules for ALL markdown files
 - **🔗 Link Integrity Checking** for internal Markdown links
 - **📚 Automatic Index Management** for DOCUMENTATION_INDEX.md
 - **⚙️ Smart Configuration Loading** with submodule support and fallback

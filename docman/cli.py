@@ -146,7 +146,7 @@ def main() -> int:
     if verbose:
         print("📋 Checking metadata format...")
 
-    metadata_validator = MetadataValidator(repo_path, config.ignore_patterns)
+    metadata_validator = MetadataValidator(repo_path, config.ignore_patterns, config)
     metadata_violations = metadata_validator.validate()
     results.metadata_violations = metadata_violations
 

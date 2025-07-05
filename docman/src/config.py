@@ -27,9 +27,11 @@ class DocManConfig:
     strict_validation: bool = True
     required_metadata: List[str] = field(default_factory=lambda: ["Status", "Version", "Last Updated"])
     valid_statuses: List[str] = field(default_factory=lambda: [
-        "✅ Production Ready", 
-        "🚧 Draft", 
-        "🚫 Deprecated"
+        "✅ Production Ready",
+        "🚧 Draft",
+        "🚫 Deprecated",
+        "⚠️ Experimental",
+        "🔄 In Progress"
     ])
     
     # Ignore patterns
@@ -52,6 +54,20 @@ class DocManConfig:
     generate_reports: bool = True
     exit_on_errors: bool = True
     auto_fix: bool = False
+
+    # Private attributes (set by ConfigLoader)
+    _config_path: str = field(default="defaults", init=False)
+    _is_fallback: bool = field(default=False, init=False)
+
+    @property
+    def config_path(self) -> str:
+        """Get the path to the configuration file that was loaded."""
+        return self._config_path
+
+    @property
+    def is_fallback(self) -> bool:
+        """Check if the configuration is using fallback/template values."""
+        return self._is_fallback
 
 
 class ConfigLoader:
@@ -367,12 +383,15 @@ class ConfigLoader:
             'recreate_index': 'recreate_index',
             'strict_validation': 'strict_validation',
             'required_metadata': 'required_metadata',
+            'valid_statuses': 'valid_statuses',
             'ignore_patterns': 'ignore_patterns',
             'verbose_output': 'verbose_output',
             'colored_output': 'colored_output',
             'emoji_indicators': 'emoji_indicators',
             'generate_reports': 'generate_reports',
-            'exit_on_errors': 'exit_on_errors'
+            'exit_on_errors': 'exit_on_errors',
+            'version_pattern': 'version_pattern',
+            'date_format': 'date_format'
         }
 
         if key in key_mapping:
@@ -420,9 +439,28 @@ strict_validation = true
 # Required metadata fields in README files
 required_metadata = [
     "Status",
-    "Version", 
+    "Version",
     "Last Updated"
 ]
+
+# Valid status values (customize these for your project)
+valid_statuses = [
+    "✅ Production Ready",
+    "🚧 Draft",
+    "🚫 Deprecated",
+    "⚠️ Experimental",
+    "🔄 In Progress"
+]
+
+# Version format validation (currently hardcoded to semantic versioning)
+# Supported: "semantic" (x.y.z format)
+# Note: Only semantic versioning is currently implemented
+version_pattern = "semantic"
+
+# Date format validation (currently hardcoded to ISO format)
+# Supported: "YYYY-MM-DD" (ISO 8601 Standard, international eindeutig)
+# Note: Only YYYY-MM-DD format is currently implemented
+date_format = "YYYY-MM-DD"
 
 # Ignore patterns - directories and files to skip during scanning
 ignore_patterns = [

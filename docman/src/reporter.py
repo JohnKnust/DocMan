@@ -59,8 +59,12 @@ class Reporter:
 
         if count > 0:
             for item in items:
-                # Remove emoji from item if it's already there
-                clean_item = item.replace("🚧 ", "").replace("✅ ", "")
+                # Remove only the leading status emoji, not emojis within the content
+                clean_item = item
+                if item.startswith("🚧 "):
+                    clean_item = item[2:]  # Remove "🚧 " from start
+                elif item.startswith("✅ "):
+                    clean_item = item[2:]  # Remove "✅ " from start
                 print(f"  • {clean_item}")
         else:
             print("  ✅ No issues found")

@@ -1,0 +1,11 @@
+# Test Custom Config
+valid_statuses = [
+    "🟢 Live",
+    "🟡 Beta", 
+    "🔴 Deprecated"
+]
+
+required_metadata = [
+    "Status",
+    "Version"
+]
