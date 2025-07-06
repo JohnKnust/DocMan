@@ -2,9 +2,9 @@
 
 **Status**: ✅ Production Ready
 **Version**: 1.0.3
-**Last Updated**: 2025-07-05
+**Last Updated**: 2025-07-06
 
-A generic, example-driven Documentation Management CLI tool that can be dropped into any monorepo to validate and maintain documentation standards. **V1.0.3 - Production Ready with fixed index file management and enhanced configuration.**
+A generic, example-driven Documentation Management CLI tool that can be dropped into any monorepo to validate and maintain documentation standards. **V1.0.3 - Production Ready with new 2-part index structure, enhanced management and smart configuration.**
 
 ## Features
 
@@ -12,7 +12,7 @@ A generic, example-driven Documentation Management CLI tool that can be dropped 
 - 🔍 **Metadata Format Enforcement** - Validates Status, Version, and Last Updated fields
 - 🔗 **Link Integrity Checking** - Verifies all markdown links point to existing files
 - 📅 **Date Consistency Reporting** - Identifies when parent READMEs are older than children
-- 📚 **Index Management** - Automatically maintains DOCUMENTATION_INDEX.md
+- 📚 **Smart Index Management** - Automatically maintains DOCUMENTATION_INDEX.md with new 2-part structure (README hierarchy + Others section)
 - 🎯 **Smart Ignore Patterns** - Respects common ignore patterns (.git, node_modules, core/, etc.)
 - 📊 **Comprehensive Reporting** - Beautiful terminal output with emojis and proper exit codes
 

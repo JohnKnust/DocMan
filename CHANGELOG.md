@@ -2,14 +2,21 @@
 
 **Status**: ✅ Production Ready
 **Version**: 1.0.3
-**Last Updated**: 2025-07-05
+**Last Updated**: 2025-07-06
 
 All notable changes to DocMan will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [1.0.3] - 2025-07-05
+## [1.0.3] - 2025-07-06
+
+### ✨ Major Enhancement - New Documentation Index Structure
+- **Complete Index Restructure**: Redesigned `DOCUMENTATION_INDEX.md` with improved 2-part structure
+  - **Part 1: README.md Hierarchy**: Shows only directories with README.md files in clean hierarchical structure (## for main dirs, ### for subdirs, max 2 levels)
+  - **Part 2: Others Section**: All non-README markdown files in alphabetically sorted 2-level hierarchy
+  - **Smart Exclusions**: Only excludes index file from repository root, allows nested index files
+  - **Dynamic Configuration**: Respects ignore_patterns and index_file from .docmanrc configuration
 
 ### 🐛 Fixed - DOCUMENTATION_INDEX.md Location Issue
 - **Index File Management**: Fixed issue where `DOCUMENTATION_INDEX.md` was created in subdirectories
@@ -21,6 +28,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **VS Code Extension v1.2.6**: Enhanced activation logic with smart config creation
 - **Versioning Clarity**: Updated documentation to distinguish between CLI and extension versions
 - **Configuration Consistency**: Synchronized ignore patterns across all components
+- **Complete Index Rebuild**: Index is now completely rebuilt on each run, ensuring obsolete entries are automatically removed
 
 ## [1.0.2] - 2025-07-04
 

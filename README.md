@@ -2,7 +2,7 @@
 
 **Status**: ✅ Production Ready
 **Version**: 1.0.3
-**Last Updated**: 2025-07-05
+**Last Updated**: 2025-07-06
 
 A comprehensive, example-driven Documentation Management System that users can drop into any monorepo - with immediate validation and automation for high-quality documentation.
 
@@ -30,7 +30,7 @@ DocMan is a generic Documentation Management CLI tool with VS Code integration, 
 - **📋 README Presence Validation**: Recursive checking of all directories for README.md files
 - **📝 Metadata Format Enforcement**: Validation of Status, Version, and Last Updated fields in ALL markdown files
 - **🔗 Link & Date Integrity**: Verification of Markdown links and date consistency
-- **📚 Index Management**: Automatic management of DOCUMENTATION_INDEX.md
+- **📚 Smart Index Management**: Automatic management of DOCUMENTATION_INDEX.md with new 2-part structure (README hierarchy + Others section)
 - **⚙️ Flexible Configuration System**: Smart .docmanrc loading with submodule support and fallback
 - **🔄 Submodule-Ready**: Clean separation of configuration and code for easy submodule integration
 - **📊 Reporting & Exit Codes**: Comprehensive reports with emoji indicators
@@ -167,7 +167,7 @@ code . && F5
 - **📋 Automatic README Validation** in all directories
 - **📝 Metadata Format Enforcement** with configurable rules for ALL markdown files
 - **🔗 Link Integrity Checking** for internal Markdown links
-- **📚 Automatic Index Management** for DOCUMENTATION_INDEX.md
+- **📚 Smart Index Management** for DOCUMENTATION_INDEX.md with hierarchical README structure and Others section
 - **⚙️ Smart Configuration Loading** with submodule support and fallback
 - **🔄 Submodule-Ready Design** with clean configuration separation
 - **💡 User-Friendly Feedback** with clear fallback warnings
@@ -259,7 +259,7 @@ python cli.py --verbose
 ### Recommended Git Tagging
 ```bash
 # Tag main project releases
-git tag -a v1.0.3 -m "DocMan v1.0.3: Fixed index management + VS Code Extension v1.2.6"
+git tag -a v1.0.3 -m "DocMan v1.0.3: New index structure + Enhanced management + VS Code Extension v1.2.6"
 git push origin v1.0.3
 
 # For component-specific releases (optional)

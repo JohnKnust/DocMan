@@ -49,13 +49,33 @@ Implement a CLI under docman/ that, when pointed at any repo root, will:
 5.	Index Management
 	•	Open or create DOCUMENTATION_INDEX.md at repo root.
 	•	Collect all .md (excluding ignores), detect those not listed in the index.
-	•	Append missing entries under headings:
+	•	Generate 2-part structure:
+
+		**Part 1: README.md Hierarchy** (only directories with README.md)
+		- ## for top-level directories
+		- ### for second-level directories (max 2 levels)
+
+		**Part 2: Others Section** (all non-README.md files)
+		- Alphabetically sorted by path
+		- 2-level hierarchy (root + 1 sublevel)
+		- Excludes DOCUMENTATION_INDEX.md itself and ignore patterns
 
             ## Project Root
             - [README.md](README.md) – ✅ Production Ready – 2025-06-08
 
             ## Applications
-            - [apps/llm/phi4/README.md](apps/llm/phi4/README.md) – 🚧 Draft – 2025-05-10
+            - [apps/README.md](apps/README.md) – ✅ Production Ready – 2025-06-12
+
+            ### Llm
+            - [apps/llm/README.md](apps/llm/README.md) – ✅ Production Ready – 2025-06-12
+            - [apps/llm/phi4/README.md](apps/llm/phi4/README.md) – ✅ Production Ready – 2025-06-08
+
+            ## Others
+
+            - [CHANGELOG.md](CHANGELOG.md) – ✅ Production Ready – 2025-07-05
+
+            ### Applications
+            - [apps/EXAMPLE.md](apps/EXAMPLE.md) – ✅ Production Ready – 2025-06-12
 
 	•	Example: show a snippet of how examples/samplerepo/DOCUMENTATION_INDEX.md is extended.
 

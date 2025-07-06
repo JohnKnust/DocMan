@@ -2,7 +2,7 @@
 
 **Status**: ✅ Production Ready
 **Version**: 1.2.6
-**Last Updated**: 2025-07-05
+**Last Updated**: 2025-07-06
 
 **Configurable documentation validation** that adapts to YOUR project's needs. Define your metadata requirements, status values, and validation rules in `.docmanrc` - DocMan validates accordingly with **real-time error detection** and **auto-fixes**.
 

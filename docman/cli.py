@@ -114,7 +114,7 @@ def main() -> int:
     # Initialize components
     repo_path = Path(args.repo_path).resolve()
     reporter = Reporter(verbose=args.verbose or config.verbose_output)
-    indexer = DocumentationIndexer(repo_path, config.ignore_patterns)
+    indexer = DocumentationIndexer(repo_path, config.ignore_patterns, config.index_file)
 
     # Initialize auto-fixer if --fix option is used
     if args.fix:
